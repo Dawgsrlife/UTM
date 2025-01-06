@@ -25,3 +25,12 @@
 [submodule "! Second Year/Winter Term/CSC148-Winter-2025"]
 	path = ! Second Year/Winter Term/CSC148-Winter-2025
 	url = https://github.com/Dawgsrlife/CSC148H5-S-Winter-2025.git
+[submodule "! Second Year/Fall Term/CSC207-A2"]
+	path = ! Second Year/Fall Term/CSC207-A2
+	url = https://github.com/Dawgsrlife/CSC207-A2-Final.git
+[submodule "! Second Year/Fall Term/CSC207-A3"]
+	path = ! Second Year/Fall Term/CSC207-A3
+	url = https://github.com/Dawgsrlife/CSC207-A3-Final.git
+[submodule "! Second Year/Fall Term/CSC207-2016-Midterm-Solutions"]
+	path = ! Second Year/Fall Term/CSC207-2016-Midterm-Solutions
+	url = https://github.com/Dawgsrlife/CSC207-2016-Midterm-Solutions.git
