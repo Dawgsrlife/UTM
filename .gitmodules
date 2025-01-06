@@ -1,6 +1,6 @@
 [submodule "CSC148H5-S-Winter-2025"]
 	path = CSC148H5-S-Winter-2025
 	url = https://github.com/Dawgsrlife/CSC148H5-S-Winter-2025.git
-[submodule "MAT232-Lecture-Notes.git"]
-	path = MAT232-Lecture-Notes.git
+[submodule "MAT232-Lecture-Notes"]
+	path = MAT232-Lecture-Notes
 	url = https://github.com/Dawgsrlife/MAT232-Lecture-Notes.git
