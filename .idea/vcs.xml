@@ -2,6 +2,19 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/CSC148H5-S-Winter-2025" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/! First Year/CSC148-Y-Summer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/! Second Year/Fall Term/CSC207-2016-Midterm-Solutions" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/! Second Year/Fall Term/CSC207-A1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/! Second Year/Fall Term/CSC207-A2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/! Second Year/Fall Term/CSC207-A3" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/! Second Year/Fall Term/CSC207-Content" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/! Second Year/Fall Term/CSC236-Assignments" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/! Second Year/Fall Term/CSC258-Labs" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/! Second Year/Fall Term/CSC258-Sokoban-Project" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/! Second Year/Winter Term/CSC148-Winter-2025" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/! Second Year/Winter Term/CSC209-Winter-2025" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/! Second Year/Winter Term/CSC263-Winter-2025" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/! Second Year/Winter Term/MAT232-Lecture-Notes" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/! Second Year/Winter Term/MGT150-Practice" vcs="Git" />
   </component>
 </project>
