@@ -34,3 +34,6 @@
 [submodule "! Second Year/Fall Term/CSC207-2016-Midterm-Solutions"]
 	path = ! Second Year/Fall Term/CSC207-2016-Midterm-Solutions
 	url = https://github.com/Dawgsrlife/CSC207-2016-Midterm-Solutions.git
+[submodule "! Second Year/Winter Term/CSC209-Winter-2025"]
+	path = ! Second Year/Winter Term/CSC209-Winter-2025
+	url = https://github.com/Dawgsrlife/CSC209.git
