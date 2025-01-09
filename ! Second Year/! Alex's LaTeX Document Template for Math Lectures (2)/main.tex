@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{amsthm,amsmath,amsfonts,lipsum}
+\usepackage[T1]{fontenc}
+\usepackage{beramono}
+\usepackage{listings}
+\usepackage{fontawesome5}
+\usepackage{adjustbox}
+\usepackage{mathabx}
+\usepackage{thmtools}
+\usepackage{import}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{physics}
+\usepackage{float}
+\usepackage[english]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+% Define custom tcolorbox styles for notes
+\tcbuselibrary{skins, breakable}
+\newtcolorbox{definitionbox}{colframe=RoyalBlue, colback=blue!5!white, title=Definition}
+\newtcolorbox{examplebox}{colframe=ForestGreen, colback=green!5!white, title=Example}
+\newtcolorbox{notebox}{colframe=RedOrange, colback=orange!5!white, title=Note}
+\newtcolorbox{theorembox}{colframe=RoyalPurple, colback=purple!5!white, title=Theorem}
+
+% Geometry settings
+\geometry{letterpaper, portrait, includeheadfoot=true, hmargin=1in, vmargin=1in}
+\onehalfspacing
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{MAT232 - Lecture Notes}
+\rhead{\thepage}
+\lfoot{University of Toronto Mississauga}
+\rfoot{\today}
+
+% Document starts
+\begin{document}
+\renewcommand{\familydefault}{\rmdefault}
+\input{titlepage}
+\pagebreak
+
+\normalsize
+
+\section*{Lecture Title}
+\begin{notebox}
+This template is designed for MAT232 lecture notes. Replace this content with your specific lecture details.
+\end{notebox}
+
+\section*{Key Concepts}
+\begin{definitionbox}
+A \textbf{parametric equation} is a set of equations that express the coordinates of the points of a curve as functions of a variable, called a parameter.
+\end{definitionbox}
+
+\section*{Examples}
+\begin{examplebox}
+\textbf{Example 1:} Consider the parametric equations:
+\[ x = t, \quad y = t^2, \quad t \in \mathbb{R}. \]
+\begin{itemize}
+    \item At $t = 0$, $(x, y) = (0, 0)$.
+    \item At $t = 1$, $(x, y) = (1, 1)$.
+\end{itemize}
+This describes a parabola.
+\end{examplebox}
+
+\section*{Theorems and Proofs}
+\begin{theorembox}
+\textbf{Theorem:} If $x(t)$ and $y(t)$ are differentiable functions, the slope of the curve is given by:
+\[ \frac{dy}{dx} = \frac{\frac{dy}{dt}}{\frac{dx}{dt}}, \quad \text{provided } \frac{dx}{dt} \neq 0. \]
+\end{theorembox}
+
+\section*{Additional Notes}
+\begin{notebox}
+Always check the domain of the parameter $t$ when solving problems involving parametric equations.
+\end{notebox}
+
+\end{document}
