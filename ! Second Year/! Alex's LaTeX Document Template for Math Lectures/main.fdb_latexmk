@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1736441293.98658 "c:/Users/33576/! UTM/! Second Year/Winter Term/MAT232-Lecture-Notes/Lecture Notes/Lecture X/main.tex" "main.pdf" "main" 1736441295.57065 0
-  "c:/Users/33576/! UTM/! Second Year/Winter Term/MAT232-Lecture-Notes/Lecture Notes/Lecture X/main.tex" 1736441244 2582 17f078fa024294dfa646fe2e2782316a ""
+["pdflatex"] 1736442049.90626 "c:/Users/33576/! UTM/! Second Year/Winter Term/MAT232-Lecture-Notes/Lecture Notes/Lecture X/main.tex" "main.pdf" "main" 1736442051.55129 0
+  "c:/Users/33576/! UTM/! Second Year/Winter Term/MAT232-Lecture-Notes/Lecture Notes/Lecture X/main.tex" 1736442047 3219 1fc5869330994e076369b88ad3ff58d5 ""
   "c:/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1727285803 2971 def0b6c1f0b107b3b936def894055589 ""
   "c:/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1727285803 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1727287667 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -220,9 +220,12 @@
   "c:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1727297209 5523052 a6c4264ca43d05e5adfe84e964c2ac4c ""
   "c:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1727296253 3325960 5fac605b348f32104185a90287f47418 ""
   "c:/texlive/2024/texmf.cnf" 1727296015 713 e69b156964470283e0530f5060668171 ""
-  "main.aux" 1736441295 317 ac0bdc39a23e2b30c01c172647976fe5 "pdflatex"
-  "main.out" 1736441295 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main.tex" 1736441244 2582 17f078fa024294dfa646fe2e2782316a ""
+  "main.aux" 1736442051 1049 6e2d9109367854dad5bd5b9c908bece6 "pdflatex"
+  "main.out" 1736442051 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.tex" 1736442047 3219 1fc5869330994e076369b88ad3ff58d5 ""
+  "sample_image.jpg" 1736441765 7660 85608fa263154431da985ad621fbc020 ""
+  "sample_image1.jpg" 1736441765 7660 85608fa263154431da985ad621fbc020 ""
+  "sample_image2.jpg" 1736441765 7660 85608fa263154431da985ad621fbc020 ""
   "titlepage.tex" 1736441293 454 6d967bd73670093447898038641b5462 ""
   (generated)
   "main.aux"

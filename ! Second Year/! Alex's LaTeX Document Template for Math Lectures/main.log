@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.25)  9 JAN 2025 11:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.25)  9 JAN 2025 12:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -917,15 +917,37 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 65.
  (c:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+<sample_image.jpg, id=16, 147.4308pt x 147.4308pt>
+File: sample_image.jpg Graphic file (type jpg)
+<use sample_image.jpg>
+Package pdftex.def Info: sample_image.jpg  used on input line 75.
+(pdftex.def)             Requested size: 281.85587pt x 281.90086pt.
+
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.83 
+l.79 
       [1{c:/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+<sample_image1.jpg, id=30, 147.4308pt x 147.4308pt>
+File: sample_image1.jpg Graphic file (type jpg)
+<use sample_image1.jpg>
+Package pdftex.def Info: sample_image1.jpg  used on input line 88.
+(pdftex.def)             Requested size: 281.85587pt x 281.90086pt.
 
-[2] (./main.aux)
+
+[2 <./sample_image.jpg>]
+<sample_image2.jpg, id=38, 147.4308pt x 147.4308pt>
+File: sample_image2.jpg Graphic file (type jpg)
+<use sample_image2.jpg>
+Package pdftex.def Info: sample_image2.jpg  used on input line 101.
+(pdftex.def)             Requested size: 281.85587pt x 281.90086pt.
+
+
+[3 <./sample_image1.jpg>]
+
+[4 <./sample_image2.jpg>] (./main.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-09-10>
@@ -939,18 +961,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 33722 strings out of 473579
- 650037 string characters out of 5732263
- 1133546 words of memory out of 5000000
- 56074 multiletter control sequences out of 15000+600000
+ 33757 strings out of 473579
+ 650725 string characters out of 5732263
+ 1130734 words of memory out of 5000000
+ 56103 multiletter control sequences out of 15000+600000
  570170 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,11n,101p,635b,595s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/mathabx-type1/matha10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx3583.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on main.pdf (3 pages, 122471 bytes).
+Output written on main.pdf (5 pages, 148756 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
- 61 compressed objects within 1 object stream
- 8 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 106 PDF objects out of 1000 (max. 8388607)
+ 72 compressed objects within 1 object stream
+ 14 named destinations out of 1000 (max. 500000)
+ 28 words of extra memory for PDF output out of 10000 (max. 10000000)
 
