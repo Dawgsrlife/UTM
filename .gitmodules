@@ -16,6 +16,7 @@
 [submodule "! Second Year/Fall Term/CSC236-Assignments"]
 	path = ! Second Year/Fall Term/CSC236-Assignments
 	url = https://github.com/Dawgsrlife/CSC236.git
+	branch = main
 [submodule "! Second Year/Winter Term/MGT150-Practice"]
 	path = ! Second Year/Winter Term/MGT150-Practice
 	url = https://github.com/Dawgsrlife/MGT150-Practice-Problems.git
@@ -46,3 +47,4 @@
 [submodule "CSC384"]
 	path = CSC384
 	url = https://github.com/Dawgsrlife/CSC384.git
+	branch = main
