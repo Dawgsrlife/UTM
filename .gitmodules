@@ -45,6 +45,7 @@
 [submodule "! Third Year/Fall Term/CSC324"]
 	path = ! Third Year/Fall Term/CSC324
 	url = https://github.com/Dawgsrlife/CSC324.git
+	branch = main
 [submodule "CSC384"]
 	path = CSC384
 	url = https://github.com/Dawgsrlife/CSC384.git
