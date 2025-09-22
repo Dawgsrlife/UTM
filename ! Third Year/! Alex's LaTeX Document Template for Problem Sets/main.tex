@@ -1,0 +1,268 @@
+\documentclass[11pt]{article}
+
+%===================================================================================
+% ESSENTIAL PACKAGES
+%===================================================================================
+\usepackage[T1]{fontenc}                    % Font encoding
+\usepackage{amsmath,amsfonts,amssymb}       % Math packages
+\usepackage{amsthm}                         % Theorem environments
+\usepackage{geometry}                       % Page layout
+\usepackage{fancyhdr}                       % Headers and footers
+\usepackage{tcolorbox}                      % Colored boxes
+\usepackage{listings}                       % Code listings
+\usepackage{xcolor}                         % Colors
+\usepackage{enumitem}                       % Custom lists
+\usepackage{graphicx}                       % Images
+\usepackage{background}                     % Background image
+\usepackage{hyperref}                       % Links (load last)
+
+%===================================================================================
+% PAGE SETUP
+%===================================================================================
+\geometry{letterpaper, margin=0.9in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+\renewcommand{\baselinestretch}{1.1}
+
+% Header and footer
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{[COURSE CODE] - Problem Set [NUMBER]}
+\rhead{\thepage}
+\lfoot{University of Toronto Mississauga}
+\rfoot{\today}
+
+%===================================================================================
+% BACKGROUND IMAGE
+%===================================================================================
+\backgroundsetup{
+  scale=1,
+  opacity=0.45,
+  angle=0,
+  position=current page.center,
+  contents={\includegraphics[width=1.2\paperwidth, height=1.2\paperheight]{background_image/nostalgic_paper_square.png}}
+}
+
+%===================================================================================
+% SOPHISTICATED WARM COLOR PALETTE
+%===================================================================================
+\definecolor{questioncolor}{RGB}{76,101,124}     % Warm slate blue
+\definecolor{answercolor}{RGB}{107,135,95}       % Sage green
+\definecolor{proofcolor}{RGB}{134,102,130}       % Dusty mauve
+\definecolor{codecolor}{RGB}{89,89,89}           % Warm charcoal
+\definecolor{algorithmcolor}{RGB}{180,118,91}    % Terracotta
+
+% Light background tints that complement the paper
+\definecolor{questionbg}{RGB}{248,250,252}       % Very light blue tint
+\definecolor{answerbg}{RGB}{249,251,248}         % Very light green tint
+\definecolor{proofbg}{RGB}{251,248,250}          % Very light mauve tint
+\definecolor{codebg}{RGB}{248,248,248}           % Very light gray tint
+\definecolor{algorithmbg}{RGB}{252,249,247}      % Very light terracotta tint
+
+%===================================================================================
+% SOPHISTICATED VINTAGE-INSPIRED BOXES
+%===================================================================================
+\tcbuselibrary{skins, breakable}
+
+% Question box - elegant slate blue
+\newtcolorbox{questionbox}{
+  colframe=questioncolor,
+  colback=questionbg,
+  coltitle=questionbg,
+  colbacktitle=questioncolor,
+  title=\textsc{Question},
+  fonttitle=\bfseries\normalsize,
+  breakable,
+  enhanced,
+  boxrule=1.2pt,
+  leftrule=3pt,
+  left=10pt,
+  right=10pt,
+  top=6pt,
+  bottom=8pt,
+  toptitle=4pt,
+  bottomtitle=4pt,
+  arc=2pt
+}
+
+% Answer box - sophisticated sage green
+\newtcolorbox{answerbox}{
+  colframe=answercolor,
+  colback=answerbg,
+  coltitle=answerbg,
+  colbacktitle=answercolor,
+  title=\textsc{Solution},
+  fonttitle=\bfseries\normalsize,
+  breakable,
+  enhanced,
+  boxrule=1.2pt,
+  leftrule=3pt,
+  left=10pt,
+  right=10pt,
+  top=6pt,
+  bottom=8pt,
+  toptitle=4pt,
+  bottomtitle=4pt,
+  arc=2pt
+}
+
+% Proof box - refined dusty mauve
+\newtcolorbox{proofbox}{
+  colframe=proofcolor,
+  colback=proofbg,
+  coltitle=proofbg,
+  colbacktitle=proofcolor,
+  title=\textsc{Proof},
+  fonttitle=\bfseries\normalsize,
+  breakable,
+  enhanced,
+  boxrule=1.2pt,
+  leftrule=3pt,
+  left=10pt,
+  right=10pt,
+  top=6pt,
+  bottom=8pt,
+  toptitle=4pt,
+  bottomtitle=4pt,
+  arc=2pt
+}
+
+% Algorithm box - warm terracotta
+\newtcolorbox{algorithmbox}{
+  colframe=algorithmcolor,
+  colback=algorithmbg,
+  coltitle=algorithmbg,
+  colbacktitle=algorithmcolor,
+  title=\textsc{Algorithm},
+  fonttitle=\bfseries\normalsize,
+  breakable,
+  enhanced,
+  boxrule=1.2pt,
+  leftrule=3pt,
+  left=10pt,
+  right=10pt,
+  top=6pt,
+  bottom=8pt,
+  toptitle=4pt,
+  bottomtitle=4pt,
+  arc=2pt
+}
+
+% Code box - elegant charcoal
+\newtcolorbox{codebox}{
+  colframe=codecolor,
+  colback=codebg,
+  coltitle=codebg,
+  colbacktitle=codecolor,
+  title=\textsc{Implementation},
+  fonttitle=\bfseries\normalsize,
+  breakable,
+  enhanced,
+  boxrule=1.2pt,
+  leftrule=3pt,
+  left=10pt,
+  right=10pt,
+  top=6pt,
+  bottom=8pt,
+  toptitle=4pt,
+  bottomtitle=4pt,
+  arc=2pt
+}
+
+%===================================================================================
+% CODE LISTINGS SETUP
+%===================================================================================
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{questioncolor},
+  commentstyle=\color{codecolor!70},
+  stringstyle=\color{algorithmcolor},
+  numberstyle=\tiny\color{codecolor!60},
+  numbers=left,
+  breaklines=true,
+  frame=none,
+  backgroundcolor=\color{codebg},
+  xleftmargin=6pt,
+  xrightmargin=6pt,
+  framexleftmargin=6pt
+}
+
+%===================================================================================
+% DOCUMENT START
+%===================================================================================
+\begin{document}
+
+\input{titlepage}
+
+%===================================================================================
+% PROBLEM SET CONTENT
+%===================================================================================
+
+{\Large\textbf{Problem 1}}
+\vspace{4pt}
+\begin{questionbox}
+[Insert problem statement here]
+\end{questionbox}
+\vspace{6pt}
+\begin{answerbox}
+[Your solution here]
+\end{answerbox}
+
+\vspace{20pt}
+
+{\Large\textbf{Problem 2}}
+\vspace{4pt}
+\begin{questionbox}
+[Insert problem statement here]
+\end{questionbox}
+\vspace{6pt}
+\begin{answerbox}
+[Your solution here]
+\end{answerbox}
+
+\vspace{20pt}
+
+{\Large\textbf{Problem 3}}
+\vspace{4pt}
+\begin{questionbox}
+[Insert problem statement here]
+\end{questionbox}
+\vspace{6pt}
+\begin{proofbox}
+[Your proof here]
+\end{proofbox}
+
+\vspace{20pt}
+
+{\Large\textbf{Problem 4}}
+\vspace{4pt}
+\begin{questionbox}
+[Insert algorithmic problem here]
+\end{questionbox}
+\vspace{6pt}
+\begin{algorithmbox}
+[Pseudocode here]
+\end{algorithmbox}
+\vspace{6pt}
+\begin{codebox}
+\begin{lstlisting}[language=Python]
+# Your code implementation here
+def solution():
+    pass
+\end{lstlisting}
+\end{codebox}
+
+\vspace{20pt}
+
+{\Large\textbf{Problem 5}}
+\vspace{4pt}
+\begin{questionbox}
+[Insert problem statement here]
+\end{questionbox}
+\vspace{6pt}
+\begin{answerbox}
+[Your solution here]
+\end{answerbox}
+
+\end{document}
