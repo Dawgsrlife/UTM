@@ -53,3 +53,6 @@
 [submodule "! Third Year/Fall Term/CSC384"]
 	path = ! Third Year/Fall Term/CSC384
 	url = https://github.com/Dawgsrlife/CSC384.git
+[submodule "! Third Year/Fall Term/CSC373"]
+	path = ! Third Year/Fall Term/CSC373
+	url = https://github.com/Dawgsrlife/CSC373.git
