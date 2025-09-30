@@ -70,3 +70,6 @@
 	path = ! Third Year/Fall Term/CSC373
 	url = https://github.com/Dawgsrlife/CSC373.git
 	branch = main
+[submodule "! Third Year/Fall Term/CSC258"]
+	path = ! Third Year/Fall Term/CSC258
+	url = https://github.com/Dawgsrlife/CSC258-2025-.git
