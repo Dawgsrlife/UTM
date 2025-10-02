@@ -1,14 +1,16 @@
 # Cloning UTM Repository with Nested Submodules
 
+> **Note:** These commands are optimized for PowerShell on Windows.
+
 ### Option 1: One-Command Clone (Recommended)
 
-```git
+```powershell
 git clone --recursive https://github.com/Dawgsrlife/UTM.git
 ```
 
 ### Option 2: Step-by-Step Approach
 
-```git
+```powershell
 # Clone the main repository
 git clone https://github.com/Dawgsrlife/UTM.git
 
@@ -21,7 +23,7 @@ git submodule update --init --recursive
 
 ### Option 3: If You Already Have a Partial Clone
 
-```git
+```powershell
 # If you already cloned but missing submodules
 cd UTM
 
@@ -29,7 +31,7 @@ cd UTM
 git submodule update --init --recursive
 
 # Ensure all submodules are on their proper branches
-git submodule foreach --recursive 'git checkout main || git checkout master || echo "No main/master branch"'
+git submodule foreach --recursive 'git checkout main; if (!$?) { git checkout master }; if (!$?) { Write-Host \"No main/master branch\" }'
 
 # Pull latest changes for all submodules
 git submodule update --remote --recursive
@@ -37,15 +39,15 @@ git submodule update --remote --recursive
 
 ### Verification Commands (Run After Clone)
 
-```git
+```powershell
 # Verify all submodules are properly initialized
 git submodule status --recursive
 
 # Check specifically for third year courses
-git submodule status --recursive | grep "Third Year"
+git submodule status --recursive | Select-String 'Third Year'
 
 # Verify WDI nested submodule is working
-cd "! Third Year/Fall Term/CSC373/assignments/WDI"
+cd '! Third Year/Fall Term/CSC373/assignments/WDI'
 git status
 git remote -v
 ```
