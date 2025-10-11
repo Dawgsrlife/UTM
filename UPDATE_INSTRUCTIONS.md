@@ -3,13 +3,30 @@
 > **Note:** These commands are optimized for PowerShell on Windows.
 
 # Option 0: Just USE THIS!
-```powershell
-git pull origin main;
-git submodule update --remote --recursive;
 
+```powershell
+# Pull the main repository
+git pull origin main;
+
+# Recursively pull and update all submodules (including nested ones)
+git pull --recurse-submodules
+git submodule update --init --recursive --remote
+
+# Automatically ensure each submodule is on 'main' or 'master'
 git submodule foreach --recursive `
     'git fetch origin;
-     git checkout main 2>$null || git checkout master 2>$null || echo "Staying on current branch"'
+     branch=$(git symbolic-ref --short -q HEAD 2>$null);
+     if [ -z "$branch" ]; then
+         if git show-ref --verify --quiet refs/heads/main; then
+             git checkout main;
+         elif git show-ref --verify --quiet refs/heads/master; then
+             git checkout master;
+         else
+             echo "⚠️  No main/master branch found — staying on current commit.";
+         fi;
+     else
+         echo "✔️  Already on branch: $branch";
+     fi'
 ```
 
 ### Option 1: One-Command Update (Recommended)
