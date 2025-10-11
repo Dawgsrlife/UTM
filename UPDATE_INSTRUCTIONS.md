@@ -2,6 +2,16 @@
 
 > **Note:** These commands are optimized for PowerShell on Windows.
 
+# Option 0: Just USE THIS!
+```powershell
+git pull origin main;
+git submodule update --remote --recursive;
+
+git submodule foreach --recursive `
+    'git fetch origin;
+     git checkout main 2>$null || git checkout master 2>$null || echo "Staying on current branch"'
+```
+
 ### Option 1: One-Command Update (Recommended)
 
 ```powershell
