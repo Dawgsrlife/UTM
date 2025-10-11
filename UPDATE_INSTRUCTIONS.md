@@ -9,6 +9,10 @@ git pull origin main;
 git pull --recurse-submodules;
 git submodule update --init --recursive --remote;
 git submodule foreach --recursive 'git fetch origin --quiet; b=$(git symbolic-ref --short -q HEAD 2>/dev/null || echo); if [ -z "$b" ]; then if git show-ref --verify --quiet refs/heads/main; then git checkout -q main || true; elif git show-ref --verify --quiet refs/heads/master; then git checkout -q master || true; else echo NO_MAIN_OR_MASTER; fi; else echo BRANCH:$b; fi'
+git pull origin main;
+git pull --recurse-submodules;
+git submodule update --init --recursive --remote;
+git submodule foreach --recursive 'git fetch origin --quiet; b=$(git symbolic-ref --short -q HEAD 2>/dev/null || echo); if [ -z "$b" ]; then if git show-ref --verify --quiet refs/heads/main; then git checkout -q main || true; elif git show-ref --verify --quiet refs/heads/master; then git checkout -q master || true; fi; b=$(git symbolic-ref --short -q HEAD 2>/dev/null || echo); fi; if [ -n "$b" ] && git show-ref --verify --quiet "refs/remotes/origin/$b"; then git pull --ff-only --recurse-submodules origin "$b" || true; else git pull --ff-only --recurse-submodules || true; fi; git submodule update --init --recursive --remote || true'
 ```
 
 ...and follow up with these:
