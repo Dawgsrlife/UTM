@@ -2,6 +2,28 @@
 
 > **Note:** These commands are optimized for PowerShell on Windows.
 
+# for push
+
+```powershell
+# Stage all changes in each submodule
+git submodule foreach "git add -A"
+
+# Commit changes in each submodule
+git submodule foreach "git commit -m 'Update submodule'"
+
+# Push changes from each submodule to their remote
+git submodule foreach "git push"
+
+# Stage the submodule pointer updates in the main repository
+git add .
+
+# Commit the submodule pointer updates in the main repository
+git commit -m "Update submodule references"
+
+# Push the main repository changes
+git push
+```
+
 # Option 0: Just USE THIS!
 
 ```powershell
