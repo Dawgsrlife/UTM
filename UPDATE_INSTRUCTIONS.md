@@ -24,7 +24,7 @@ git commit -m "Update submodule references"
 git push
 ```
 
-# Option 0: Just USE THIS!
+# for pull
 
 ```powershell
 git pull origin main;
