@@ -1,8 +1,12 @@
-# Updating UTM Repository with All Changes
+# UTM Repository - Update Instructions
 
 > **Note:** These commands are optimized for PowerShell on Windows.
 
-# for push
+---
+
+## 📤 Pushing Changes (Submodules + Main Repo)
+
+Run these commands to push all changes from submodules and the main repository:
 
 ```powershell
 # Stage all changes in each submodule
@@ -24,7 +28,11 @@ git commit -m "Update submodule references"
 git push
 ```
 
-# for pull
+---
+
+## 📥 Pulling Updates (Main Repo + All Submodules)
+
+Run these commands to pull the latest changes from the main repository and all submodules:
 
 ```powershell
 git pull origin main;
@@ -34,88 +42,42 @@ git submodule foreach --recursive 'git fetch origin --quiet; b=$(git symbolic-re
 git submodule foreach --recursive 'git fetch origin --quiet; b=$(git symbolic-ref --short -q HEAD 2>/dev/null || echo); if [ -z "$b" ]; then if git show-ref --verify --quiet refs/heads/main; then git checkout -q main || true; elif git show-ref --verify --quiet refs/heads/master; then git checkout -q master || true; fi; b=$(git symbolic-ref --short -q HEAD 2>/dev/null || echo); fi; if [ -n "$b" ] && git show-ref --verify --quiet "refs/remotes/origin/$b"; then git pull --ff-only --recurse-submodules origin "$b" || true; else git pull --ff-only --recurse-submodules || true; fi; git submodule update --init --recursive --remote || true'
 ```
 
-...and follow up with these:
+---
 
-## branch confirmation:
+## 📦 After Cloning (Initialize Submodules)
+
+If you just cloned the repository and submodules aren't initialized yet, run:
 
 ```powershell
-git submodule foreach --recursive 'b=$(git symbolic-ref --short -q HEAD 2>/dev/null || echo); if [ -z "$b" ]; then echo DETACHED; else echo BRANCH:$b; fi'
+git submodule update --init --recursive
 ```
 
-## (OPTIONAL) force-fix if needed:
+This will:
+
+- Initialize all submodules (including nested ones)
+- Checkout the correct commits
+- Set up the submodule structure properly
+
+---
+
+## ✅ Verification
+
+After pulling or initializing, verify everything is properly synced:
 
 ```powershell
-git submodule foreach --recursive 'git fetch origin --quiet; b=$(git symbolic-ref --short -q HEAD 2>/dev/null || echo); if [ -z "$b" ]; then if git show-ref --verify --quiet refs/heads/main; then git checkout -q main; elif git show-ref --verify --quiet refs/heads/master; then git checkout -q master; fi; fi; b=$(git symbolic-ref --short -q HEAD 2>/dev/null || echo); echo BRANCH:$b'
-```
-
-## final status check:
-
-```powershell
-git submodule status --recursive
-```
-
-### Option 1: One-Command Update (Recommended)
-
-```powershell
-git pull origin main; git submodule update --remote --recursive; git submodule foreach --recursive 'git checkout main; if (!$?) { git checkout master }'
-```
-
-### Option 2: Step-by-Step Approach
-
-```powershell
-# Navigate to your UTM directory
-cd path/to/your/UTM
-
-# Pull changes from main UTM repository
-git pull origin main
-
-# Update all submodules to their latest commits
-git submodule update --remote --recursive
-
-# Ensure all submodules are on proper branches (not detached HEAD)
-git submodule foreach --recursive 'git checkout main; if (!$?) { git checkout master }; if (!$?) { Write-Host \"Staying on current branch\" }'
-```
-
-### Option 3: If You Encounter Sync Issues
-
-```powershell
-# Reset and force update everything
-git submodule foreach --recursive 'git reset --hard'
-
-# Force update all submodules
-git submodule update --init --recursive --force
-
-# Pull latest changes for all submodules
-git submodule update --remote --recursive
-```
-
-### Verification Commands (Run After Update)
-
-```powershell
-# Verify everything is up to date
-git status
-
-# Check all submodules are properly synced
+# Check all submodules status
 git submodule status --recursive
 
-# Check specifically for third year courses
-git submodule status --recursive | Select-String 'Third Year'
-
-# Verify WDI nested submodule is working
-cd '! Third Year/Fall Term/CSC373/assignments/WDI'
+# Verify main repo status
 git status
-git remote -v
 ```
 
-### Key Points:
+---
 
-- `git pull origin main` gets your latest UTM repo changes
-- `git submodule update --remote --recursive` pulls all submodule updates including WDI
-- The `foreach` command ensures no detached HEAD states
-- Handles the nested CSC373 → WDI submodule structure automatically
-- **PowerShell Note:** Use semicolons (`;`) instead of `&&` to chain commands
+## 💡 Key Points
 
-### Pro Tip:
-
-- The Option 1 single command is your best bet - it handles everything automatically including syncing the WDI submodule nested within CSC373!
-- In PowerShell, use single quotes (`'`) for paths with special characters to avoid parsing issues
+- **Push workflow:** Submodules first, then main repo
+- **Pull workflow:** Main repo first, then submodules with branch tracking
+- **After clone:** Always run `git submodule update --init --recursive`
+- **PowerShell:** Use semicolons (`;`) to chain commands
+- **Nested submodules:** Commands handle nested structures automatically (e.g., CSC373 → WDI)
