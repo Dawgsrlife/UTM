@@ -1,0 +1,435 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{mathtools}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CSC463H1 --- Assignment 3}
+\rhead{Alexander Meng (mengale1)}
+\cfoot{\thepage}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+% Custom colors
+\definecolor{proofcolor}{rgb}{0.95,0.95,1.0}
+\definecolor{defcolor}{rgb}{0.95,1.0,0.95}
+
+% Proof box
+\tcbuselibrary{skins,breakable}
+\newtcolorbox{proofbox}[1][]{
+  colback=proofcolor,
+  colframe=blue!75!black,
+  fonttitle=\bfseries,
+  title=Proof,
+  breakable,
+  #1
+}
+
+\title{\textbf{CSC463H1: Computational Complexity Theory}\\
+       \large Assignment 3 Solutions}
+\author{Alexander Meng\\
+        \texttt{mengale1}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question 1 (10 points)}
+\textbf{Show that the set of incompressible strings contains no infinite subset that is Turing recognizable.}
+
+\begin{definition}
+A string $x \in \{0,1\}^*$ is \emph{incompressible} if its Kolmogorov complexity satisfies $K(x) \geq |x|$, where $K(x)$ is the length of the shortest program that outputs $x$.
+\end{definition}
+
+\begin{proofbox}
+We prove this by contradiction. Suppose there exists an infinite subset $S$ of incompressible strings that is Turing recognizable. Let $M$ be a Turing machine that recognizes $S$.
+
+\vspace{0.5em}
+\noindent\textbf{Step 1: Enumeration of $S$.}
+
+Since $M$ recognizes $S$, we can effectively enumerate the elements of $S$ by dovetailing: systematically run $M$ on all inputs in lexicographic order, and whenever $M$ accepts a string $x$, add $x$ to our enumeration. This gives us a sequence $s_1, s_2, s_3, \ldots$ of all strings in $S$.
+
+\vspace{0.5em}
+\noindent\textbf{Step 2: Construction of a compression procedure.}
+
+Consider the following compression scheme for strings in $S$:
+\begin{itemize}[leftmargin=2em]
+    \item To describe a string $s_i \in S$ (the $i$-th element in the enumeration), we need only:
+    \begin{enumerate}[label=(\alph*)]
+        \item A description of the Turing machine $M$ (fixed constant $c_M$)
+        \item The index $i$ in binary (requires $\lceil \log_2 i \rceil$ bits)
+        \item A program to enumerate $S$ using $M$ and extract the $i$-th element (fixed constant $c_P$)
+    \end{enumerate}
+\end{itemize}
+
+Therefore, for the $i$-th string $s_i \in S$:
+\[
+K(s_i) \leq c_M + \lceil \log_2 i \rceil + c_P = O(\log i)
+\]
+
+\vspace{0.5em}
+\noindent\textbf{Step 3: Deriving the contradiction.}
+
+Since $S$ is infinite, it contains arbitrarily long strings. For any length $n$, there exists some index $j$ such that $|s_j| \geq n$.
+
+However, by our assumption, every string in $S$ is incompressible, so:
+\[
+K(s_j) \geq |s_j| \geq n
+\]
+
+But from Step 2, we have:
+\[
+K(s_j) = O(\log j)
+\]
+
+For sufficiently large $j$, we have $\log j < |s_j|$ (since strings in $S$ can be arbitrarily long while their indices grow only logarithmically in description). This contradicts the incompressibility of $s_j$.
+
+\vspace{0.5em}
+\noindent\textbf{Conclusion.}
+
+The assumption that an infinite subset of incompressible strings is Turing recognizable leads to a contradiction. Therefore, no infinite subset of incompressible strings is Turing recognizable. \hfill $\square$
+\end{proofbox}
+
+\vspace{1em}
+
+\newpage
+
+\section*{Question 2 (10 points)}
+\textbf{Let \textit{MODEXP} be the set of all tuples $(a,b,c,p)$ such that $a,b,c,p$ are integers in binary, and $a^b \equiv c \pmod{p}$. Show that $\textit{MODEXP} \in P$.}
+
+\begin{definition}
+The language $\textit{MODEXP}$ is defined as:
+\[
+\textit{MODEXP} = \{(a,b,c,p) : a,b,c,p \in \mathbb{Z}, \; a^b \equiv c \pmod{p}\}
+\]
+where all integers are represented in binary.
+\end{definition}
+
+\begin{proofbox}
+To show $\textit{MODEXP} \in P$, we construct a deterministic polynomial-time algorithm that decides membership in \textit{MODEXP}.
+
+\vspace{0.5em}
+\noindent\textbf{Algorithm: Fast Modular Exponentiation}
+
+Given input $(a,b,c,p)$ in binary:
+
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{Input validation:} Check that $p > 0$. If $p = 0$, reject (division by zero undefined). If $p = 1$, accept if $c \equiv 0 \pmod{1}$ (always true).
+    
+    \item \textbf{Compute $a^b \bmod p$ using binary exponentiation:}
+    
+    \begin{itemize}
+        \item Initialize: $\text{result} \gets 1$, $\text{base} \gets a \bmod p$
+        \item Write $b$ in binary: $b = \sum_{i=0}^{k-1} b_i 2^i$ where $k = \lceil \log_2(b+1) \rceil$
+        \item For $i = 0$ to $k-1$:
+        \begin{itemize}
+            \item If $b_i = 1$: $\text{result} \gets (\text{result} \times \text{base}) \bmod p$
+            \item $\text{base} \gets (\text{base} \times \text{base}) \bmod p$
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Compare:} Accept if $\text{result} \equiv c \pmod{p}$; otherwise reject.
+\end{enumerate}
+
+\vspace{0.5em}
+\noindent\textbf{Correctness:}
+
+The algorithm correctly computes $a^b \bmod p$ by the binary representation of $b$:
+\[
+a^b = a^{\sum_{i=0}^{k-1} b_i 2^i} = \prod_{i=0}^{k-1} (a^{2^i})^{b_i}
+\]
+Each iteration maintains the invariant that $\text{base} = a^{2^i} \bmod p$ and $\text{result}$ accumulates the product of relevant powers.
+
+\vspace{0.5em}
+\noindent\textbf{Time Complexity Analysis:}
+
+Let $n$ be the total input size in bits. Then:
+\begin{itemize}[leftmargin=2em]
+    \item $|a|, |b|, |c|, |p| = O(n)$ bits each
+    \item Number of iterations: $k = O(\log b) = O(n)$ (since $b$ has at most $n$ bits)
+    \item Each iteration performs:
+    \begin{itemize}
+        \item At most 2 multiplications of $O(n)$-bit numbers: $O(n^2)$ time using standard multiplication
+        \item Modulo operation: $O(n^2)$ time using standard division
+    \end{itemize}
+    \item Total time: $O(n) \times O(n^2) = O(n^3)$
+\end{itemize}
+
+Since the algorithm runs in time polynomial in the input size and always halts, we have $\textit{MODEXP} \in P$. \hfill $\square$
+\end{proofbox}
+
+\newpage
+
+\section*{Question 3 (10 points)}
+\textbf{Show that if $P = NP$, then every language $A \in P$ except $A = \varnothing$ and $A = \Sigma^*$ is $NP$-complete.}
+
+\begin{definition}
+A language $A$ is \emph{$NP$-complete} if:
+\begin{enumerate}[label=(\roman*)]
+    \item $A \in NP$, and
+    \item For every language $L \in NP$, we have $L \leq_P A$ (i.e., $L$ polynomial-time reduces to $A$).
+\end{enumerate}
+\end{definition}
+
+\begin{proofbox}
+Assume $P = NP$. Let $A \in P$ be any language such that $A \neq \varnothing$ and $A \neq \Sigma^*$.
+
+\vspace{0.5em}
+\noindent\textbf{Step 1: Show $A \in NP$.}
+
+Since $A \in P$ and $P = NP$ by assumption, we immediately have $A \in NP$. \checkmark
+
+\vspace{0.5em}
+\noindent\textbf{Step 2: Show every $L \in NP$ reduces to $A$ in polynomial time.}
+
+Let $L \in NP$ be arbitrary. Since $P = NP$, we have $L \in P$. Therefore, there exists a polynomial-time Turing machine $M_L$ that decides $L$.
+
+Since $A$ is nontrivial:
+\begin{itemize}
+    \item There exists some string $y_{\text{yes}} \in A$ (since $A \neq \varnothing$)
+    \item There exists some string $y_{\text{no}} \notin A$ (since $A \neq \Sigma^*$)
+\end{itemize}
+
+Both $y_{\text{yes}}$ and $y_{\text{no}}$ are fixed strings that can be hardcoded into our reduction.
+
+\vspace{0.5em}
+\noindent\textbf{Construction of the reduction $f : \Sigma^* \to \Sigma^*$:}
+
+Define $f$ as follows on input $x$:
+\begin{enumerate}[leftmargin=2em]
+    \item Run $M_L$ on input $x$ for at most $p(|x|)$ steps, where $p$ is the polynomial bound on $M_L$'s running time.
+    \item If $M_L$ accepts $x$, output $f(x) = y_{\text{yes}}$.
+    \item If $M_L$ rejects $x$, output $f(x) = y_{\text{no}}$.
+\end{enumerate}
+
+\vspace{0.5em}
+\noindent\textbf{Verification:}
+
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{$f$ is computable in polynomial time:} 
+    
+    The reduction runs $M_L$ for polynomial time $p(|x|)$, then outputs a fixed string. Total time is $O(p(|x|)) = \text{poly}(|x|)$. \checkmark
+    
+    \item \textbf{$f$ is a valid reduction:}
+    
+    We need to show $x \in L \iff f(x) \in A$.
+    \begin{align*}
+        x \in L &\iff M_L \text{ accepts } x \\
+        &\iff f(x) = y_{\text{yes}} \\
+        &\iff f(x) \in A
+    \end{align*}
+    
+    Therefore, $L \leq_P A$. \checkmark
+\end{itemize}
+
+\vspace{0.5em}
+\noindent\textbf{Conclusion.}
+
+Since $A \in NP$ and every language $L \in NP$ reduces to $A$ in polynomial time, $A$ is $NP$-complete. This holds for all nontrivial languages $A \in P$ under the assumption $P = NP$. \hfill $\square$
+\end{proofbox}
+
+\begin{remark}
+This result shows that if $P = NP$, the notion of $NP$-completeness becomes trivial: nearly every language in $P$ would be $NP$-complete. This is one reason why $P \neq NP$ is widely believed to be true.
+\end{remark}
+
+\newpage
+
+\section*{Question 4 (10 points)}
+\textbf{Let \textit{INT-FACT} be the set of all pairs of binary integers $(m,n)$ such that $m$ has a factor less than $n$ and greater than one. Show that \textit{INT-FACT} is in NP and in co-NP. Show that if \textit{INT-FACT} $\in P$, then there is a polynomial-time algorithm for factoring binary integers.}
+
+\begin{definition}
+The language \textit{INT-FACT} is defined as:
+\[
+\textit{INT-FACT} = \{(m,n) : m,n \in \mathbb{Z}^+, \; \exists d \in \mathbb{Z} \text{ such that } 1 < d < n \text{ and } d \mid m\}
+\]
+where all integers are represented in binary.
+\end{definition}
+
+\subsection*{Part (a): \textit{INT-FACT} $\in$ NP $\cap$ co-NP}
+
+\begin{proofbox}[title=Proof that \textit{INT-FACT} $\in$ NP]
+
+To show $\textit{INT-FACT} \in NP$, we construct a polynomial-time verifier.
+
+\vspace{0.5em}
+\noindent\textbf{Certificate:} A divisor $d$ such that $1 < d < n$ and $d \mid m$.
+
+\vspace{0.5em}
+\noindent\textbf{Verifier $V$:} On input $((m,n), d)$:
+\begin{enumerate}[leftmargin=2em]
+    \item Check that $1 < d < n$. If not, reject.
+    \item Compute $m \bmod d$ using polynomial-time division.
+    \item Accept if $m \bmod d = 0$ (i.e., $d \mid m$); otherwise reject.
+\end{enumerate}
+
+\vspace{0.5em}
+\noindent\textbf{Correctness:}
+\begin{itemize}[leftmargin=2em]
+    \item If $(m,n) \in \textit{INT-FACT}$, then there exists a divisor $d$ with $1 < d < n$ and $d \mid m$. The verifier accepts with certificate $d$.
+    \item If $(m,n) \notin \textit{INT-FACT}$, no such $d$ exists, so no certificate will cause the verifier to accept.
+\end{itemize}
+
+\vspace{0.5em}
+\noindent\textbf{Time Complexity:}
+The verifier runs in time polynomial in $|m| + |n| + |d| = O(\log m + \log n)$, since:
+\begin{itemize}
+    \item Comparison operations: $O(\log n)$
+    \item Division $m \bmod d$: $O(\log^2 m)$ using standard algorithms
+\end{itemize}
+
+Therefore, $\textit{INT-FACT} \in NP$. \hfill $\square$
+\end{proofbox}
+
+\begin{proofbox}[title=Proof that \textit{INT-FACT} $\in$ co-NP]
+
+To show $\textit{INT-FACT} \in \text{co-NP}$, we show that $\overline{\textit{INT-FACT}} \in NP$.
+
+\[
+\overline{\textit{INT-FACT}} = \{(m,n) : \forall d, \; 1 < d < n \implies d \nmid m\}
+\]
+
+This states: "$m$ has no divisor in the range $(1, n)$", which means either $m$ is prime and $n > m$, or all of $m$'s nontrivial divisors are $\geq n$.
+
+\vspace{0.5em}
+\noindent\textbf{Certificate Strategy:}
+
+We use the fact that primality testing is in $P$. This is a fundamental result in complexity theory that allows us to verify primality in polynomial time.
+
+For $(m,n) \in \overline{\textit{INT-FACT}}$:
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{Case 1:} $m = 1$. Then $m$ has no divisors $> 1$, so $(m,n) \in \overline{\textit{INT-FACT}}$ for any $n \geq 2$.
+    
+    \item \textbf{Case 2:} $m$ is prime and $n > m$. Certificate: primality proof for $m$.
+    
+    \item \textbf{Case 3:} $m$ is composite with smallest prime factor $p \geq n$. Certificate: the complete prime factorization of $m$.
+\end{itemize}
+
+\vspace{0.5em}
+\noindent\textbf{Verifier $V'$:} On input $((m,n), \pi)$ where $\pi$ is a certificate:
+
+\begin{enumerate}[leftmargin=2em]
+    \item If $m = 1$ and $n \geq 2$, accept.
+    \item If $\pi$ claims "$m$ is prime":
+    \begin{itemize}
+        \item Verify $m$ is prime using polynomial-time primality testing (PRIMES $\in P$).
+        \item If $m$ is prime and $n > m$, accept; otherwise reject.
+    \end{itemize}
+    \item If $\pi$ provides a factorization $m = p_1^{e_1} \cdots p_k^{e_k}$:
+    \begin{itemize}
+        \item Verify each $p_i$ is prime using polynomial-time primality testing.
+        \item Verify $\prod_{i=1}^k p_i^{e_i} = m$ using polynomial-time multiplication.
+        \item Check that $\min(p_1, \ldots, p_k) \geq n$.
+        \item If all checks pass, accept; otherwise reject.
+    \end{itemize}
+\end{enumerate}
+
+\vspace{0.5em}
+\noindent\textbf{Time Complexity:}
+\begin{itemize}[leftmargin=2em]
+    \item Primality verification: polynomial time (using PRIMES $\in P$)
+    \item Verification of factorization: polynomial in the size of the factorization
+    \item Total: polynomial time
+\end{itemize}
+
+\vspace{0.5em}
+\noindent\textbf{Certificate Size:}
+The factorization certificate $m = p_1^{e_1} \cdots p_k^{e_k}$ has polynomial size because:
+\begin{itemize}[leftmargin=2em]
+    \item Number of distinct prime factors: $k \leq \log_2 m$ (since each prime $\geq 2$)
+    \item Each prime $p_i$ requires $O(\log m)$ bits to represent
+    \item Each exponent $e_i \leq \log_2 m$ requires $O(\log \log m)$ bits
+    \item Total certificate size: $O(k \cdot \log m) = O(\log^2 m)$ bits = polynomial
+\end{itemize}
+
+Therefore, $\overline{\textit{INT-FACT}} \in NP$, which implies $\textit{INT-FACT} \in \text{co-NP}$. \hfill $\square$
+\end{proofbox}
+
+\newpage
+
+\subsection*{Part (b): If \textit{INT-FACT} $\in P$, then factoring is in $P$}
+
+\begin{proofbox}
+Assume $\textit{INT-FACT} \in P$. We construct a polynomial-time algorithm to factor any integer $m$.
+
+\vspace{0.5em}
+\noindent\textbf{Factoring Algorithm:}
+
+\textbf{Input:} Integer $m > 1$ in binary.
+
+\textbf{Output:} A nontrivial factor of $m$, or "prime" if $m$ is prime.
+
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{Check if $m$ is prime:} Run $(m, m) \in \textit{INT-FACT}$?
+    \begin{itemize}
+        \item If $(m,m) \notin \textit{INT-FACT}$, then $m$ has no divisor in $(1, m)$, so $m$ is prime. Output "prime" and halt.
+        \item Otherwise, $m$ is composite. Proceed to Step 2.
+    \end{itemize}
+    
+    \item \textbf{Binary search for smallest nontrivial divisor:}
+    
+    Let $\ell = 2$ and $r = m$. We perform binary search to find the smallest divisor of $m$.
+    
+    \begin{itemize}
+        \item While $\ell < r$:
+        \begin{enumerate}[label=(\alph*)]
+            \item Set $\text{mid} = \lfloor (\ell + r) / 2 \rfloor$.
+            \item Query: Is $(m, \text{mid} + 1) \in \textit{INT-FACT}$?
+            \item If yes: $m$ has a divisor in $(1, \text{mid}+1)$, so the smallest divisor is $\leq \text{mid}$. Set $r = \text{mid}$.
+            \item If no: $m$ has no divisor in $(1, \text{mid}+1)$, so the smallest divisor is $> \text{mid}$. Set $\ell = \text{mid} + 1$.
+        \end{enumerate}
+        \item When the loop terminates, $\ell = r$ is our candidate for the smallest divisor.
+        \item \textbf{Verify divisibility:} Compute $m \bmod \ell$ using polynomial-time division.
+        \item If $\ell \mid m$ (i.e., $m \bmod \ell = 0$), then $\ell$ is the smallest nontrivial divisor of $m$.
+    \end{itemize}
+    
+    \item \textbf{Output:} Return $\ell$ as a nontrivial factor of $m$.
+\end{enumerate}
+
+\vspace{0.5em}
+\noindent\textbf{Correctness:}
+
+The binary search maintains the following invariant:
+\begin{itemize}[leftmargin=2em]
+    \item All nontrivial divisors of $m$ (if any exist) are $\geq \ell$
+    \item If $m$ is composite, there exists a divisor $\leq r$
+\end{itemize}
+
+When the loop terminates with $\ell = r$, we have identified a single candidate value. The divisibility check $m \bmod \ell = 0$ confirms that $\ell$ is indeed a divisor. Since all smaller values have been eliminated by the binary search, $\ell$ must be the smallest nontrivial divisor.
+
+\vspace{0.5em}
+\noindent\textbf{Time Complexity:}
+
+\begin{itemize}[leftmargin=2em]
+    \item Binary search performs $O(\log m)$ iterations.
+    \item Each iteration queries $\textit{INT-FACT}$, which takes polynomial time by assumption.
+    \item Total time: $O(\log m) \times \text{poly}(\log m) = \text{poly}(\log m)$.
+\end{itemize}
+
+Since the algorithm runs in polynomial time and correctly finds a nontrivial factor of $m$, we have shown that if $\textit{INT-FACT} \in P$, then integer factorization is in $P$. \hfill $\square$
+\end{proofbox}
+
+\begin{remark}
+This result shows that solving the decision problem \textit{INT-FACT} efficiently is at least as hard as factoring integers, a problem not known to be in $P$ but also not proven to be outside $P$. The containment of \textit{INT-FACT} in both NP and co-NP suggests it may not be $NP$-complete (under the assumption $NP \neq \text{co-NP}$).
+\end{remark}
+
+\vspace{2em}
+
+\begin{center}
+\Large\textbf{--- End of Solutions ---}
+\end{center}
+
+\end{document}
