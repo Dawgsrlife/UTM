@@ -134,8 +134,52 @@ For each question:
 - Include type contracts for parameters and return values
 - Add comments explaining key steps
 - Prove correctness (loop invariants, induction, etc.)
-- Analyze runtime complexity with detailed justification
+- Analyze runtime complexity with detailed justification (see complexity analysis requirements below)
 - Consider edge cases explicitly
+
+### For Runtime/Complexity Analysis Questions:
+**CRITICAL:** Runtime analysis requires substantial detail proportional to mark value. Never provide one-sentence complexity statements.
+
+**Minimum requirements for ANY complexity analysis:**
+- **Identify all major operations** (initialization, loops, per-iteration costs)
+- **Bound loop iterations** with explicit reasoning (why at most n? why exactly log n?)
+- **Break down per-iteration cost** into component operations with individual complexities
+- **Identify dominant cost** and explain why other costs are absorbed
+- **Show final calculation** with clear arithmetic (e.g., n × O(m) = O(mn))
+- **State assumptions** about data structures if relevant (hash sets for O(1) lookup, etc.)
+
+**Proportional detail guidelines:**
+- **1 mark:** 2-3 paragraphs minimum, cover initialization + loop bound + dominant cost
+- **2 marks:** 4-6 paragraphs minimum, itemized breakdown of per-iteration costs with 3-5 operations
+- **3+ marks:** Full page analysis, multiple loop levels, amortized analysis if applicable
+
+**Example structure for 2-mark runtime question:**
+```
+
+We analyze the runtime by examining each operation:
+
+Initialization: [specific operations] takes O(?) time because [reason].
+
+Main Loop: Executes at most [bound] iterations because [explicit reasoning about
+why this bound holds, what decreases/increases per iteration].
+
+Per-Iteration Cost:
+
+- Operation 1: O(?) because [detailed reason]
+- Operation 2: O(?) because [detailed reason]
+- Operation 3: O(?) because [detailed reason]
+- [Continue for all significant operations]
+
+Dominant cost per iteration is [operation] at O(?). Other operations total O(?),
+which is absorbed because [reason].
+
+Total Runtime: [iterations] × O([per-iteration]) = O([final complexity])
+
+[Optional: Note about data structure assumptions if relevant]
+
+```
+
+**Common failure pattern:** Stating "Loop runs n times, each iteration O(m), so O(nm)" without breaking down what operations cost O(m) or why the loop bound is n. This loses marks for insufficient justification.
 
 ### For NP-Completeness Proofs:
 - Show problem ∈ NP (certificate + polynomial-time verifier)
@@ -167,13 +211,13 @@ Before declaring completion, verify:
 - [ ] All questions answered completely
 - [ ] All proofs mathematically rigorous
 - [ ] All algorithms correct and efficient
-- [ ] All complexity analyses justified
-- [ ] Natural undergraduate writing voice
+- [ ] **All complexity analyses have sufficient detail** (proportional to mark value - see complexity analysis requirements)
+- [ ] Natural undergraduate writing voice (use "We show", "We analyze", "Consider", "By construction")
 - [ ] No AI markers or formulaic language
 - [ ] **No AI thinking visible** (no "Wait—", "Hmm", "Actually", meta-commentary)
 - [ ] Proper mathematical notation throughout
 - [ ] All lecture techniques properly applied
-- [ ] All claims properly justified
+- [ ] All claims properly justified with explicit reasoning
 - [ ] Document compiles without errors
 - [ ] Total marks calculated correctly
 - [ ] No TODO/FIXME markers remaining
@@ -181,6 +225,7 @@ Before declaring completion, verify:
 - [ ] All cases handled explicitly
 - [ ] Professional LaTeX presentation
 - [ ] **Zero rough work or thought process in final output**
+- [ ] **Runtime analyses break down all operations** (not just state final complexity)
 
 ## Output Format
 
@@ -566,6 +611,26 @@ Verify mathematical notation consistency:
 
 **Why this matters:** Inconsistent notation suggests multiple authors or careless work, reducing credibility.
 
+#### Pattern 7: Runtime Analysis Insufficient Detail
+
+Complexity analysis questions ALWAYS need substantial justification:
+
+```text
+Check ALL runtime/complexity analysis sections:
+1. Is there itemized breakdown of operations? (not just final answer)
+2. Are loop bounds explicitly justified? (why n iterations? why log n?)
+3. Are per-iteration costs broken into components? (3-5 bullet points minimum)
+4. Is dominant cost identified and explained?
+5. Is final calculation shown step-by-step?
+6. Are data structure assumptions stated if relevant?
+
+For 2+ mark questions: Expect 20-40 lines minimum, not 5 lines.
+```
+
+**Common failure:** Stating "loop runs n times with O(m) per iteration so O(nm)" without explaining WHY loop runs n times or WHAT operations cost O(m). This pattern loses marks for insufficient justification.
+
+**Fix:** Break down into: (1) Initialization cost, (2) Loop bound justification, (3) Per-iteration itemized breakdown with 3-5 operations, (4) Dominant cost identification, (5) Final calculation shown explicitly.
+
 ### Advanced Prompting Techniques
 
 #### Technique 1: Contextual Auditing
@@ -693,6 +758,21 @@ For each reduction/equivalence proof:
 - Check both directions properly justified
 ```
 
+**Runtime Analysis Detail Scan:**
+
+```text
+For each complexity/runtime question:
+- Count lines in analysis (should be proportional to marks: 1 mark = 10+ lines, 2 marks = 20+ lines)
+- Verify initialization costs stated explicitly
+- Verify loop bounds justified (not just asserted)
+- Verify per-iteration breakdown exists with itemized operations
+- Verify dominant cost identified and other costs explained as absorbed
+- Verify final calculation shown step-by-step (not just stated)
+- Check if data structure assumptions needed and stated
+
+RED FLAG: Any runtime analysis under 10 lines for 1+ marks is insufficient detail.
+```
+
 #### Step 3: Compilation Verification
 
 After any fixes, always verify document still compiles:
@@ -753,6 +833,12 @@ For each question:
 
 **Problem:** Mixed use of Θ vs Theta, different reduction arrow styles
 **Solution:** Establish notation conventions early, verify consistency in final pass
+
+#### Pitfall 8: Insufficient Runtime Analysis Detail
+
+**Problem:** Runtime questions answered in 5 lines when 2+ marks allocated
+**Solution:** Use proportional detail guidelines - 2 marks = 20-40 lines with itemized breakdown
+**Check:** Count lines in analysis. If under 10 lines per mark, expand with operation breakdown
 
 ### Effective Prompt Patterns
 
@@ -891,7 +977,282 @@ Use this template as your foundation, adapt to specific course needs, and achiev
 
 ---
 
-**Version:** 2.1  
+#### Pattern 8: Rigorous Final Audit Methodology
+
+**CRITICAL**: Always perform comprehensive final audit before submission. Use systematic scanning approach:
+
+```text
+Perform comprehensive final audit with the following scans:
+
+1. AI Marker Scan:
+   Search for: "Wait—", "Hmm,", "The key insight", "Let me", "I think", "It turns out"
+   Action: Remove ALL instances, replace with natural academic language
+
+2. Contraction Scan:
+   Search for: "'ll", "'ve", "'t", "'re", "'s" in formal proof sections
+   Action: Replace with full forms (e.g., "don't" → "do not")
+
+3. Notation Consistency Scan:
+   Check: Complexity notation (Θ vs Theta), set operations (∈), reduction arrows (≤_p)
+   Action: Standardize all mathematical notation
+
+4. Proof Completeness Scan:
+   For each reduction/equivalence:
+   - Verify (⇒) direction present and complete
+   - Verify (⇐) direction present and complete
+   Action: Fix any missing or weak directions
+
+5. Runtime Analysis Detail Scan:
+   For each complexity question:
+   - Count lines (should be proportional to marks: 1 mark = 10+ lines, 2 marks = 20+ lines)
+   - Verify initialization costs stated
+   - Verify loop bounds justified (not just asserted)
+   - Verify per-iteration breakdown exists
+   - Verify dominant cost identified
+   Action: Expand any insufficient analyses
+
+6. Lecture Alignment Scan:
+   Cross-reference each solution against provided lecture notes
+   - Check reduction directions correct
+   - Check approximation ratios correct
+   - Check proof techniques match course methodology
+   Action: Fix any methodological deviations
+
+7. Tone Consistency Scan:
+   Read through entire document checking for:
+   - Formulaic AI transitions ("Moreover", "Furthermore", "Additionally")
+   - Verbose itemizations that sound like AI checklists
+   - Inconsistent voice (some sections too formal, others too casual)
+   Action: Adjust to consistent undergraduate academic voice
+
+Report findings with line numbers and specific issues identified.
+```
+
+**Example audit finding:**
+
+```text
+ISSUE FOUND: Q3(d) Runtime Analysis
+- Line 590-625: Uses verbose itemized breakdown with "Step 3a:", "Step 3b:", etc.
+- Tone mismatch: Sounds like AI checklist, not natural undergraduate analysis
+- Compare to Q2/Q4 analyses which use paragraph-based explanations
+- FIX: Consolidate into 3 concise paragraphs maintaining same technical content
+```
+
+**When to use this pattern:**
+
+- ALWAYS before final submission
+- After making any late-stage edits
+- When receiving feedback about "AI-like" writing
+- When user requests "one last check" or "final audit"
+
+**Success criteria:**
+All 7 scans return zero critical issues before submission.
+
+---
+
+#### Pattern 9: Mathematical Verification After Fixes
+
+**CRITICAL**: After applying any fixes (especially to proofs or mathematical arguments), conduct rigorous mathematical verification to ensure fixes are CORRECT and haven't introduced new errors.
+
+**Verification Protocol:**
+
+1. **Original Issue Analysis**
+
+   - What was the claimed error?
+   - Was it presentation-only (style) or mathematical (logic)?
+   - What specific lines were affected?
+
+2. **Fix Impact Assessment**
+
+   - What exactly changed in the fix?
+   - Did it alter mathematical logic or only presentation?
+   - Are all mathematical claims still valid?
+
+3. **Line-by-Line Mathematical Verification**
+
+   - For proof fixes: Verify each step of new reasoning
+   - For reduction fixes: Check element accounting, both directions
+   - For algorithm fixes: Verify complexity bounds unchanged
+   - Use lecture material as ground truth
+
+4. **Cross-Reference Against Course Material**
+
+   - Does fix align with techniques taught in course?
+   - Are standard results (e.g., 2-approximation for knapsack) preserved?
+   - No references to material outside course scope?
+
+5. **Integration Check**
+   - Does fix interact correctly with surrounding proofs?
+   - Are variable names, notation still consistent?
+   - Do both proof directions still work together?
+
+**Example verification questions:**
+
+- **Q1 (3DM):** If we removed "Wait—" marker, did we preserve the complementary triple availability argument? Check: When truth triples chosen, false triples excluded → elements available for reuse ✓
+
+- **Q2 (Bin Packing Case 2):** If we added algebraic derivation, is each step valid? Check: α ≤ σ-t AND σ-α ≤ σ-t → σ ≤ 2(σ-t) → 2t ≤ σ ✓ (algebra sound)
+
+- **Q4 (Knapsack):** If we changed reasoning for w_e ≤ W, is new argument valid? Check: If w_e > W → can't contribute to FRAC → but FRAC = value_1 + (fraction of e) → contradiction ✓ (fractional relaxation property correct)
+
+**Red flags to check:**
+
+- ❌ Fix changed element accounting in reduction (count elements before/after)
+- ❌ Fix removed a case in case analysis (verify all cases still covered)
+- ❌ Fix used technique not covered in course lectures
+- ❌ Fix introduced notation inconsistency
+- ❌ Fix made one direction work but broke the other direction
+
+**When to use this pattern:**
+
+- After ANY mathematical fix before submission
+- When audit identified "logic gap" or "false claim"
+- When user requests verification that fixes are correct
+- Before declaring "ready for submission"
+
+**Output format:**
+
+Create verification document with:
+
+1. Each fix listed with before/after comparison
+2. Mathematical soundness check with step-by-step reasoning
+3. Course alignment verification
+4. Final verdict: ✅ CORRECT or ❌ ERROR INTRODUCED
+
+---
+
+#### Pattern 10: Version Comparison Validation
+
+**CRITICAL**: When fixing issues or when user provides previous version, ALWAYS compare current version against previous stable version to validate fixes are true improvements and not introducing new errors or correcting already-correct work.
+
+**Comparison Protocol:**
+
+1. **Obtain Previous Version**
+
+   - User may provide previous submission
+   - Or retrieve from git history
+   - Or compare against earlier draft in conversation
+
+2. **Question-by-Question Detailed Comparison**
+
+   - For each question, extract exact text from both versions
+   - Compare side-by-side focusing on:
+     - Mathematical claims and proofs
+     - Logic flow and case analysis
+     - Technical explanations
+     - Presentation style
+
+3. **Identify Differences**
+
+   - What changed between versions?
+   - Was it mathematical content or presentation?
+   - Was change an addition, deletion, or replacement?
+
+4. **Validate Each Change**
+
+   - **If previous had error and current fixed:** ✅ True improvement
+   - **If previous was correct and current changed:** ⚠️ Potential regression
+   - **If presentation only:** Verify mathematics unchanged
+   - **If both wrong:** Need third opinion (lecture material)
+
+5. **Mathematical Correctness Check**
+   - Previous version claim: Was it valid or invalid?
+   - Current version claim: Is it valid or invalid?
+   - Compare against course material ground truth
+
+**Critical Questions:**
+
+- **Did previous version have the "error" we claim?** (verify with exact quotes)
+- **Does current version actually fix it?** (verify new reasoning is sound)
+- **Did we introduce any NEW errors while fixing?** (check surrounding context)
+- **Are we "fixing" something that was already correct?** (dangerous over-correction)
+
+**Example Cases:**
+
+**Case 1: True Fix Validated**
+
+- Previous Q4: "if w_e > W, then no item in S could fit either" ← FALSE (S already packed!)
+- Current Q4: Uses fractional relaxation contradiction ← CORRECT
+- Verdict: ✅ Current version FIXES actual bug
+
+**Case 2: Presentation Improvement**
+
+- Previous Q3: Runtime in 1 paragraph, correct O(mn²)
+- Current Q3: Runtime in 3 paragraphs, same O(mn²)
+- Verdict: ✅ Current version IMPROVES presentation, mathematics unchanged
+
+**Case 3: Over-Correction (AVOID)**
+
+- Previous: Correct proof with valid reasoning
+- Current: "Fixed" to different approach that's actually wrong
+- Verdict: ❌ Regression - previous was correct, current broke it
+
+**Red Flags:**
+
+- ❌ User says "previous had no issues" but we claim it did (verify carefully!)
+- ❌ Can't find the "error" in previous version when searching
+- ❌ "Fix" changes correct mathematics to something different
+- ❌ Multiple "fixes" to same section (might be over-correcting)
+- ❌ User questions if we introduced errors (take seriously!)
+
+**When to use this pattern:**
+
+- User provides previous submission for comparison
+- User asks "is previous or current correct?"
+- After making multiple fixes in one session
+- When user expresses doubt about changes made
+- Before final submission if multiple revision rounds occurred
+
+**Output format:**
+
+Create comparison document with:
+
+1. **Executive Summary**: Which version is correct and why
+2. **Question-by-Question Analysis**: Exact text comparison with verdict
+3. **Critical Differences Table**: Previous vs Current with winner
+4. **Error Analysis**: What bugs existed and what got fixed
+5. **Final Recommendation**: Which version to submit
+
+**Key Insight:**
+
+This is NOT an LLM hallucination check - this is ESSENTIAL quality control! Version comparison:
+
+- Catches regression bugs (fixes that break correct work)
+- Verifies fixes are true improvements
+- Prevents over-correction of already-correct work
+- Validates mathematical reasoning changes
+- Protects against hallucinated "problems"
+
+**User's observation example:**
+
+"i dont think we even had any ai markers in this version as put above, so idk how we later introduced some"
+
+→ Take SERIOUSLY. Compare versions carefully. User may be right that previous was already clean.
+→ Verify claimed "issues" actually existed in previous version.
+→ Don't trust memory - check actual text from both versions.
+
+---
+
+**Version:** 2.5  
 **Last Updated:** November 24, 2025  
-**Based on:** Successful CSC373 PS3 completion (56/56 marks + 2 bonus)  
-**Key Additions:** Comprehensive audit methodology, contraction elimination, notation consistency verification
+**Based on:** Successful CSC373 PS3 completion (56/56 marks)  
+**Key Additions in v2.5:**
+
+- **Version Comparison Validation (Pattern 10)** - NEW
+  - Rigorous protocol for comparing previous vs current versions
+  - Validates fixes are true improvements, not regressions
+  - Prevents over-correction of already-correct work
+  - Protects against hallucinated problems
+  - Essential quality control when user provides previous submission
+- **Mathematical Verification After Fixes (Pattern 9)**
+  - Rigorous verification protocol for all mathematical fixes
+  - Line-by-line soundness checking procedure
+  - Course material cross-reference requirement
+  - Red flag detection for common fix errors
+- **Rigorous Final Audit Methodology (Pattern 8)**
+  - Systematic 7-scan approach covering all quality dimensions
+  - AI marker detection and removal protocol
+  - Tone consistency verification across entire document
+  - Lecture alignment cross-reference procedure
+- Enhanced tone consistency checking (catches AI checklists and verbose itemizations)
+- Comprehensive pre-submission verification checklist
+- All previous patterns (1-9) retained and validated
