@@ -69,19 +69,23 @@ I need your help completing a problem set to achieve 100% marks.
 
 ### For Each Question:
 
-1. **Read and understand** the problem completely
-2. **Identify the core concept** from lecture notes (reduction, approximation, NP-completeness, etc.)
-3. **Plan the solution structure** before writing:
+1. **Include the complete question text** from the assignment in your submission
+   - Use question boxes or similar formatting to clearly delineate the problem statement
+   - Include all context, definitions, examples, and instructions provided
+   - This ensures markers can grade without cross-referencing the original assignment
+2. **Read and understand** the problem completely
+3. **Identify the core concept** from lecture notes (reduction, approximation, NP-completeness, etc.)
+4. **Plan the solution structure** before writing:
    - What theorem/algorithm are we proving/designing?
    - What lecture techniques apply?
    - What are the key steps?
-4. **Write the solution** with:
+5. **Write the solution** with:
    - Clear statement of what's being proven/designed
    - Rigorous mathematical proofs with all steps justified
    - Proper notation (define all variables)
    - Case analysis where needed
    - Complexity analysis (time/space)
-5. **Audit against lecture notes** to ensure:
+6. **Audit against lecture notes** to ensure:
    - Terminology matches course usage
    - Proof techniques follow course methodology
    - All claims are properly justified per course standards
@@ -159,6 +163,7 @@ For each question:
 
 Before declaring completion, verify:
 
+- [ ] **All question text included** from original assignment (not just abbreviated summaries)
 - [ ] All questions answered completely
 - [ ] All proofs mathematically rigorous
 - [ ] All algorithms correct and efficient
