@@ -4,79 +4,66 @@
 
 ---
 
-## 📋 **Overview**
+## Overview
 
 This prompt template provides a comprehensive framework for completing problem sets across any course with maximum accuracy and professionalism. It ensures systematic auditing, proper academic presentation, and alignment with course material.
 
 ---
 
-## 🎯 **Complete Prompt Template**
+## Complete Prompt Template
 
 ```
-I need your help completing [COURSE CODE] Problem Set [NUMBER] to achieve 100% marks.
-
-## Context & Requirements
-
-**Course:** [COURSE CODE - COURSE NAME]
-**Assignment:** Problem Set [NUMBER] ([TOTAL MARKS] marks total)
-**Due Date:** [DATE]
-
-**Goal:** Achieve maximum marks ([TOTAL MARKS]/[TOTAL MARKS] = 100%) through:
-1. Mathematically rigorous and technically correct solutions
-2. Professional presentation matching a [YEAR]-year [PROGRAM] specialist undergraduate
-3. Complete alignment with course lecture material (Weeks [X-Y])
-4. Natural academic voice WITHOUT AI markers or formulaic language
+I need your help completing a problem set to achieve 100% marks.
 
 ## Materials Provided
 
 ### 1. Assignment Instructions
-[Attach or paste the complete problem set PDF/instructions]
-
-Key details:
-- Total marks: [TOTAL MARKS]
-- Question breakdown:
-  - Q1: [X marks] - [Brief description]
-  - Q2: [Y marks] - [Brief description]
-  - Q3: [Z marks] - [Brief description]
-  - [Continue for all questions]
+[Paste the complete problem set PDF text or attach the file]
 
 ### 2. Lecture Notes
-[Attach all relevant lecture notes covering the material]
+[Paste all relevant lecture notes covering the material, or attach files]
 
-Relevant lecture coverage:
-- Week [X]: [Topics covered - e.g., "Max Flow, Ford-Fulkerson algorithm"]
-- Week [Y]: [Topics covered - e.g., "Reductions, P/NP classes, NP-completeness"]
-- Week [Z]: [Topics covered - e.g., "Approximation algorithms, LP relaxation"]
-- [Continue for all relevant weeks]
+### 3. Course Context Document
+[If available, paste course syllabus, previous assignments, or any additional context]
 
-### 3. Course-Specific Context
-- **Proof style:** [e.g., "Formal mathematical proofs with clear structure"]
-- **Notation preferences:** [e.g., "Use Big-Theta for tight bounds, O() for upper bounds"]
-- **Algorithm presentation:** [e.g., "Pseudocode with line numbers and comments"]
-- **Expected depth:** [e.g., "Graduate-level rigor" or "Undergraduate-level clarity"]
+## Requirements
 
-### 4. Previous Work (if applicable)
-[If building on existing solutions, provide them here]
+**Goal:** Achieve maximum marks through:
+1. Mathematically rigorous and technically correct solutions
+2. Professional presentation matching the expected academic level for this course
+3. Complete alignment with provided lecture material
+4. Natural academic voice WITHOUT AI markers, formulaic language, or visible AI thinking
 
-## Writing Style Requirements
+## Critical Writing Standards
 
-### ✅ DO:
-- Write like a specialized [YEAR]-year computer science undergraduate
+### REQUIRED:
+- Write like a student at the appropriate academic level for this course
 - Use natural academic transitions ("We show that...", "Consider the case...", "By construction...")
 - Present proofs with clear structure (theorem statements, proof environments, QED)
 - Include rigorous mathematical justification for every claim
 - Use proper mathematical notation consistently
-- Break complex arguments into clear cases (Case 1, Case 2, etc.)
+- Break complex arguments into clear cases when needed
 - Provide intuition before formal proofs where appropriate
 - Reference specific lecture content and techniques
 
-### ❌ AVOID:
-- AI markers: "Moreover", "Furthermore", "Additionally" (unless naturally appropriate)
-- Overly formulaic transitions: "It is important to note that..."
-- Phrases like "Let's explore", "It's worth noting", "Interestingly"
-- Excessive hedging: "arguably", "potentially", "essentially"
-- Redundant emphasis: "clearly", "obviously", "evidently" (unless pedagogically necessary)
-- Corporate/marketing tone: "leverage", "utilize", "robust solution"
+### STRICTLY FORBIDDEN:
+- **AI thinking markers:** "Wait—", "Hmm,", "Let me think", "Actually,", "It turns out"
+- **Meta-commentary:** "This shows that", "We can see that", "Interestingly", "Observe that"
+- **Formulaic AI transitions:** "Moreover", "Furthermore", "Additionally" (unless naturally appropriate)
+- **Hedging phrases:** "arguably", "potentially", "essentially" (unless mathematically precise)
+- **Obvious statements:** "clearly", "obviously", "evidently" (unless pedagogically necessary)
+- **Corporate tone:** "leverage", "utilize", "robust solution"
+- **Any visible thought process or self-correction in the final document**
+
+## Output Requirements
+
+- Provide complete, polished solutions only
+- Never include rough work, drafts, or thinking process
+- All text must be final, professional, submission-ready
+- No placeholder comments like "TODO", "FIXME", "Check this"
+- No meta-commentary about the solution process
+
+
 
 ## Solution Structure
 
@@ -127,6 +114,7 @@ For each question:
 3. **Clarity:** No ambiguous statements, all variables defined
 4. **Professional:** Proper LaTeX formatting, no typos
 5. **AI markers:** Remove any formulaic or robotic phrasing
+6. **AI thinking:** Remove all visible thought process, meta-commentary, self-corrections
 
 ### Phase 5: Final Verification
 1. Compile document and verify page count
@@ -177,6 +165,7 @@ Before declaring completion, verify:
 - [ ] All complexity analyses justified
 - [ ] Natural undergraduate writing voice
 - [ ] No AI markers or formulaic language
+- [ ] **No AI thinking visible** (no "Wait—", "Hmm", "Actually", meta-commentary)
 - [ ] Proper mathematical notation throughout
 - [ ] All lecture techniques properly applied
 - [ ] All claims properly justified
@@ -186,10 +175,11 @@ Before declaring completion, verify:
 - [ ] All variables and notation defined
 - [ ] All cases handled explicitly
 - [ ] Professional LaTeX presentation
+- [ ] **Zero rough work or thought process in final output**
 
 ## Output Format
 
-Provide solutions in [FORMAT - e.g., "LaTeX document", "Markdown", "Jupyter Notebook"].
+Provide solutions in the format that best matches the assignment (LaTeX, Markdown, etc.).
 
 For LaTeX documents:
 - Use proper document structure (documentclass, packages, etc.)
@@ -207,14 +197,7 @@ For LaTeX documents:
 5. Brief summary of key techniques used per question
 6. Confirmation of alignment with lecture material
 
-## Special Instructions
-
-[Add any course-specific requirements:]
-- Specific theorem naming conventions
-- Required proof techniques
-- Formatting requirements
-- Page limits or length requirements
-- Submission platform requirements (e.g., Crowdmark, Canvas)
+**Note:** Infer output format and special requirements from the provided materials. No need to specify explicitly.
 
 ---
 
@@ -238,43 +221,50 @@ For LaTeX documents:
 
 ---
 
-## 🔧 **How to Use This Template**
+## How to Use This Template
 
-### Step 1: Fill in the Brackets
+### Step 1: Gather All Materials
 
-Replace all `[BRACKETED]` placeholders with your specific information:
+Collect everything needed:
 
-- Course code and name
-- Problem set number and total marks
-- Question breakdown with marks
-- Relevant lecture weeks and topics
-- Specific course conventions
+1. **Complete assignment instructions** (copy text from PDF or attach file)
+2. **All relevant lecture notes** (copy text or attach files)
+3. **Course syllabus** (optional, for additional context)
+4. **Any previous work** (if building on existing solutions)
 
-### Step 2: Attach Materials
+### Step 2: Paste Into Prompt
 
-Provide:
+Start a new session and:
 
-1. **Complete assignment instructions** (PDF or text)
-2. **All relevant lecture notes** (text files, PDFs, or excerpts)
-3. **Any previous work** if building on existing solutions
-4. **Course syllabus** if helpful for context
+1. **Copy the prompt template** (starting from "I need your help...")
+2. **Paste your assignment instructions** in Section 1
+3. **Paste all relevant lecture notes** in Section 2
+4. **Add any additional context** in Section 3 (syllabus, previous work, etc.)
+5. **Launch the session**
 
-### Step 3: Specify Unique Requirements
+### Key Principle
 
-Add any course-specific details:
+**Let the AI extract the details.** You don't need to manually identify:
 
-- Preferred proof style (direct, contradiction, induction)
-- Algorithm presentation format
-- Notation preferences
-- Specific theorems/techniques to use or avoid
+- Course codes or names
+- Question marks breakdown
+- Lecture week numbers
+- Topic categorization
+- Academic level
 
-### Step 4: Launch with Context
+The AI will automatically:
 
-Start a new session and paste the filled template along with all materials.
+- Identify course and assignment from materials
+- Parse question structure and marks
+- Detect academic level and writing style
+- Extract relevant lecture topics
+- Apply appropriate methodologies
+
+**Your only job:** Paste the materials. The AI handles the rest.
 
 ---
 
-## 📊 **Why This Template Works**
+## Why This Template Works
 
 ### 1. **Comprehensive Context**
 
@@ -308,7 +298,7 @@ Start a new session and paste the filled template along with all materials.
 
 ---
 
-## 🎓 **Key Principles for Maximum Marks**
+## Key Principles for Maximum Marks
 
 ### Technical Correctness
 
@@ -340,7 +330,7 @@ Start a new session and paste the filled template along with all materials.
 
 ---
 
-## 🚀 **Advanced Tips**
+## Advanced Tips
 
 ### For Complex Proofs
 
@@ -372,51 +362,531 @@ Start a new session and paste the filled template along with all materials.
 
 ---
 
-## 📝 **Example Usage Scenarios**
+## Example Usage Scenarios
 
 ### Scenario 1: Algorithm Design Assignment
 
-```
-[Course: CSC373 - Algorithm Design]
-[Assignment: Problem Set 2 on Max Flow and Bipartite Matching]
-[Material: Week 6-7 lecture notes on Ford-Fulkerson, Max-Flow Min-Cut]
-[Goal: Design algorithms with correctness proofs and complexity analysis]
+```text
+I need your help completing a problem set to achieve 100% marks.
+
+## Materials Provided
+
+### 1. Assignment Instructions
+[Paste entire PDF text of CSC373 Problem Set 2]
+
+### 2. Lecture Notes
+[Paste Week 6 lecture notes on Ford-Fulkerson]
+[Paste Week 7 lecture notes on Max-Flow Min-Cut]
+
+### 3. Course Context Document
+[Paste course syllabus or previous assignment if helpful]
+
+[Rest of template requirements...]
 ```
 
 ### Scenario 2: Complexity Theory Assignment
 
-```
-[Course: CSC373 - Algorithm Design]
-[Assignment: Problem Set 3 on NP-Completeness]
-[Material: Week 8-9 lecture notes on P/NP, reductions, approximation]
-[Goal: NP-completeness proofs and approximation algorithms]
+```text
+I need your help completing a problem set to achieve 100% marks.
+
+## Materials Provided
+
+### 1. Assignment Instructions
+[Paste entire Problem Set 3 PDF covering NP-completeness]
+
+### 2. Lecture Notes
+[Paste Week 8 notes on P/NP classes and reductions]
+[Paste Week 9 notes on approximation algorithms]
+
+[Rest of template requirements...]
 ```
 
-### Scenario 3: Proof-Based Assignment
+### Scenario 3: Simple Usage
 
-```
-[Course: CSC236 - Theory of Computation]
-[Assignment: Problem Set 1 on Induction and Recursion]
-[Material: Week 1-3 lecture notes on proof techniques]
-[Goal: Rigorous mathematical proofs using course methodology]
+```text
+I need your help completing a problem set to achieve 100% marks.
+
+## Materials Provided
+
+### 1. Assignment Instructions
+[Paste problem set]
+
+### 2. Lecture Notes
+[Paste all relevant lecture notes]
+
+[Include the full requirements section from template]
 ```
 
 ---
 
-## ✨ **Final Notes**
+## Iterative Improvement Strategy
 
-This template has been refined through successful completion of multiple problem sets achieving 100% marks. Key success factors:
+### The Multi-Phase Audit Approach
+
+**Don't expect perfection on first pass.** Use iterative refinement:
+
+#### Phase 1: Initial Complete Draft
+
+1. Run the full prompt with all materials
+2. Get complete solutions for all questions
+3. Don't fix issues yet—let AI finish everything first
+
+#### Phase 2: Focused Technical Audits
+
+For each question individually:
+
+```text
+Audit Q[X] against the lecture notes from Week [Y-Z]. Specifically check:
+1. Does the proof technique match what's taught in lectures?
+2. Are we using the correct terminology from the course?
+3. Are all mathematical steps justified per course standards?
+4. Fix any technical errors found.
+```
+
+**Why individual audits?** Each question requires deep focus. Catching 5 critical errors across 5 questions (one per question) is typical and expected.
+
+#### Phase 3: Comprehensive Lecture Alignment
+
+After individual fixes:
+
+```text
+Do a comprehensive audit ensuring all work is correct and completed according to
+the involved lecture notes from Week [X] to Week [Y].
+```
+
+This catches methodological inconsistencies across questions.
+
+#### Phase 4: Final Polish
+
+Request specific improvements:
+
+```text
+- Add type contracts to all pseudocode method signatures
+- Fix any formatting issues (e.g., formulas exceeding margins)
+- Ensure consistent notation throughout
+```
+
+#### Phase 5: Pre-Submission Verification
+
+```text
+Do a final check for:
+1. Compilation (no errors)
+2. All marks present and correct
+3. No TODO/FIXME markers
+4. No AI thinking markers
+5. Professional presentation
+```
+
+### Critical Success Patterns
+
+#### Pattern 1: Catch AI Thinking Immediately
+
+**Always do a final read-through yourself.** Look for:
+
+- "Wait—" or "Hmm," (thinking out loud)
+- "The key insight" (meta-commentary)
+- "Interestingly," "It turns out" (AI observations)
+- "Let me think" or "Actually," (self-correction)
+
+**When found, request specific fix:**
+
+```text
+URGENT: Remove the AI thinking marker "[exact phrase]" from Q[X].
+Rewrite with natural undergraduate analysis using concrete steps instead of meta-commentary.
+```
+
+#### Pattern 2: Verify Reduction Directions
+
+For NP-completeness proofs, **always verify:**
+
+```text
+In Q[X], confirm the reduction direction is correct.
+We need [KNOWN NP-COMPLETE] ≤_p [TARGET], not the reverse.
+```
+
+Common error: Reducing target TO known problem instead of known TO target.
+
+#### Pattern 3: Check Both Directions
+
+For reduction correctness proofs:
+
+```text
+Verify Q[X] proves both directions:
+- (⇒) If original has solution, reduced instance has solution
+- (⇐) If reduced instance has solution, original has solution
+
+Check the backward direction especially—it's often weaker.
+```
+
+#### Pattern 4: Approximation Ratio Verification
+
+For approximation algorithms:
+
+```text
+In Q[X], verify:
+1. Approximation ratio defined correctly (ALG/OPT vs OPT/ALG)
+2. Both upper and lower bounds provided
+3. Construction shows ratio is tight (Θ notation)
+```
+
+#### Pattern 5: Contraction Elimination
+
+Academic writing should avoid contractions in formal proofs:
+
+```text
+Search document for contractions that weaken formality:
+- "We'll" → "We will" or "We show"
+- "don't" → "do not"
+- "can't" → "cannot"
+- "won't" → "will not"
+- "isn't/aren't" → "is not/are not"
+
+Fix all instances to maintain formal academic tone.
+```
+
+**Why this matters:** Contractions make proofs sound informal or conversational rather than rigorous academic work.
+
+#### Pattern 6: Mathematical Notation Consistency
+
+Ensure consistent use of complexity notation and symbols:
+
+```text
+Verify mathematical notation consistency:
+1. Complexity bounds: Use Θ(·), O(·), Ω(·) consistently (not mix of Greek/Latin)
+2. Set operations: ∈, ⊆, ∪, ∩ used correctly throughout
+3. Logic symbols: ∀, ∃, ∧, ∨, ⇒, ⇐ match course conventions
+4. Reduction notation: ≤_p written consistently (not mixing formats)
+5. Variable naming: Same concepts use same symbols across questions
+```
+
+**Why this matters:** Inconsistent notation suggests multiple authors or careless work, reducing credibility.
+
+### Advanced Prompting Techniques
+
+#### Technique 1: Contextual Auditing
+
+Instead of generic "check for errors," provide context:
+
+```text
+Q[X] uses a pricing scheme for approximation. According to Week [Y] lectures,
+pricing schemes work by [method]. Verify our proof follows this methodology
+and the averaging argument is sound.
+```
+
+#### Technique 2: Specify Expected Fixes
+
+Tell AI what you expect to find:
+
+```text
+I suspect Q[X] has issues with:
+- Clause gadget indices (check which variable elements are used)
+- Backward direction partition logic (verify the case analysis)
+
+Audit specifically for these and fix as needed.
+```
+
+#### Technique 3: Compilation-Driven Debugging
+
+If document formatting breaks:
+
+```text
+Line [X] in Q[Y] exceeds the tcolorbox by [N] characters.
+Split the formula across multiple lines while maintaining mathematical correctness.
+```
+
+#### Technique 4: Lecture-Specific Validation
+
+Reference specific lecture content:
+
+```text
+Week [X] lectures define NP-completeness as:
+1. Show ∈ NP via verifier
+2. Reduce known NP-complete TO target
+
+Verify ALL NP-completeness proofs follow this exact structure.
+```
+
+### Quality Control Checklist
+
+#### Before Requesting Improvements
+
+- [ ] Read through entire document yourself
+- [ ] Note ALL issues (don't fix one at a time)
+- [ ] Check lecture alignment for each question
+- [ ] Verify mathematical correctness personally
+- [ ] Look for AI markers in final output
+
+#### When Requesting Fixes
+
+- [ ] Be specific about what's wrong
+- [ ] Provide line numbers or section references
+- [ ] Reference lecture content when relevant
+- [ ] Request verification after fixes
+- [ ] Ask for compilation check
+
+#### Before Final Submission
+
+- [ ] Compile document (check for errors)
+- [ ] Verify all marks present (should sum to total)
+- [ ] Search for AI markers (grep for common phrases)
+- [ ] Search for contractions (scan for apostrophes in formal proofs)
+- [ ] Check mathematical notation consistency
+- [ ] Check no incomplete work (TODO, FIXME, ???)
+- [ ] Verify professional presentation
+
+### Comprehensive Audit Methodology
+
+When you request "one last audit" or final verification, structure it systematically:
+
+#### Step 1: Determine Audit Scope
+
+Don't just ask "check for errors." Define what needs auditing:
+
+```text
+Perform comprehensive final audit covering:
+1. AI markers and thinking patterns
+2. Technical correctness (reductions, approximations, proofs)
+3. Proof completeness (both directions for all bi-directional proofs)
+4. Natural voice (contractions, formality, academic tone)
+5. Mathematical notation consistency
+6. Formatting and presentation quality
+```
+
+#### Step 2: Execute Systematic Scans
+
+Use targeted searches to catch specific issues:
+
+**AI Marker Scan:**
+
+```text
+Search for: "Wait—", "Hmm,", "The key insight", "Let me",
+            "I think", "It turns out", "Observe that"
+Report: Number of matches found and locations
+```
+
+**Contraction Scan:**
+
+```text
+Search for: "'ll", "'ve", "'t", "'s", "'re"
+Report: All contractions in formal proof sections
+```
+
+**Notation Consistency Scan:**
+
+```text
+Check: All complexity bounds use same format (Θ vs Theta)
+       All set notation consistent (∈ vs element-of)
+       All reduction notation uniform (≤_p format)
+```
+
+**Proof Completeness Scan:**
+
+```text
+For each reduction/equivalence proof:
+- Verify (⇒) direction present and complete
+- Verify (⇐) direction present and complete
+- Check both directions properly justified
+```
+
+#### Step 3: Compilation Verification
+
+After any fixes, always verify document still compiles:
+
+```text
+After making fixes:
+1. Compile document
+2. Check for new errors introduced
+3. Verify page count unchanged (or expected)
+4. Confirm no formatting breaks
+```
+
+#### Step 4: Technical Verification
+
+Cross-reference against course material:
+
+```text
+For each question:
+- Reduction directions correct (A ≤_p B = B at least as hard as A)
+- Approximation ratios correct (ALG/OPT for min, OPT/ALG for max)
+- Proof techniques match lecture methodology
+- Terminology matches course usage
+```
+
+### Common Pitfalls and Solutions
+
+#### Pitfall 1: Accepting First Draft
+
+**Problem:** First draft often has 3-5 technical errors
+**Solution:** Plan for 2-3 rounds of focused audits per question
+
+#### Pitfall 2: Generic Audit Requests
+
+**Problem:** "Check for errors" finds nothing
+**Solution:** "Audit Q3 pricing scheme against Week 9 lecture method"
+
+#### Pitfall 3: Fixing Issues Individually
+
+**Problem:** Makes 10 separate edit requests
+**Solution:** List all issues, request fixes in batch
+
+#### Pitfall 4: Skipping Lecture Alignment
+
+**Problem:** Technically correct but methodologically wrong
+**Solution:** Always verify against provided lecture notes
+
+#### Pitfall 5: Missing AI Thinking
+
+**Problem:** Submitting work with "Wait—" or "The key insight"
+**Solution:** ALWAYS do final search for AI markers before submission
+
+#### Pitfall 6: Overlooking Contractions
+
+**Problem:** Formal proofs contain "We'll", "don't", "can't"
+**Solution:** Scan for apostrophes, replace contractions with full forms
+
+#### Pitfall 7: Inconsistent Notation
+
+**Problem:** Mixed use of Θ vs Theta, different reduction arrow styles
+**Solution:** Establish notation conventions early, verify consistency in final pass
+
+### Effective Prompt Patterns
+
+#### For Initial Generation
+
+```text
+Complete this problem set achieving 100% marks.
+[Paste full assignment + lecture notes + requirements]
+```
+
+#### For Focused Audits
+
+```text
+Audit Q[N] for [specific issue] according to Week [X] lectures.
+Fix any errors found and verify correctness.
+```
+
+#### For Comprehensive Checks
+
+```text
+Comprehensive audit ensuring all work correct and aligned with
+Week [X-Y] lectures. Check each question's methodology.
+```
+
+#### For Specific Fixes
+
+```text
+In Q[N] line [M], [describe specific issue].
+Fix this while maintaining [constraints].
+```
+
+#### For Final Verification
+
+```text
+Final pre-submission check:
+1. Compilation status
+2. All marks present
+3. No TODO/FIXME/AI markers
+4. Professional presentation
+Report status for each.
+```
+
+### Time Management Strategy
+
+**Typical Timeline for Problem Set Completion:**
+
+**Session 1 (1-2 hours):** Initial generation + first read
+
+- Generate complete first draft
+- Read through personally
+- Note obvious issues
+
+**Session 2 (2-3 hours):** Focused technical audits
+
+- Audit each question individually against lectures
+- Fix technical errors (expect 3-5 across all questions)
+- Verify fixes compile and are correct
+
+**Session 3 (1 hour):** Comprehensive alignment
+
+- Check all questions follow course methodology
+- Ensure consistent terminology and notation
+- Verify all lecture techniques properly applied
+
+**Session 4 (30 minutes):** Final polish
+
+- Add type contracts, fix formatting
+- Remove AI markers if any found
+- Eliminate contractions from formal sections
+- Verify mathematical notation consistency
+- Final compilation and verification
+
+**Session 5 (15 minutes):** Pre-submission check
+
+- Systematic audit: AI markers, contractions, notation
+- Verify marks, check TODOs
+- Compilation verification
+- Final read-through
+- Ready to submit
+
+### Success Metrics
+
+**You've achieved 100% quality when:**
+
+- All technical proofs verified against lectures
+- All reduction directions confirmed correct
+- All approximation ratios proven with bounds
+- Zero AI thinking/meta-commentary in output
+- Zero contractions in formal proof sections
+- Mathematical notation consistent throughout
+- Natural undergraduate academic voice maintained
+- Document compiles cleanly without errors
+- All marks accounted for (sum equals total)
+- No incomplete work markers (TODO/FIXME)
+- Professional LaTeX presentation
+- Ready to submit with confidence
+
+---
+
+## Final Notes
+
+This template has been refined through successful completion of multiple problem sets achieving 100% marks (including CSC373 PS3: 56/56 + 2 bonus). Key success factors:
 
 1. **Complete context** prevents hallucination and ensures accuracy
 2. **Systematic workflow** prevents missed requirements
-3. **Multiple audits** catch errors at every level
-4. **Natural voice** ensures professional presentation
+3. **Multiple iterative audits** catch errors at every level (expect 3-5 rounds)
+4. **Natural academic voice** ensures professional presentation without contractions or AI markers
 5. **Lecture alignment** guarantees methodological correctness
+6. **Notation consistency** demonstrates attention to detail and care
+7. **Comprehensive final audit** systematically verifies all quality dimensions
+8. **Individual + holistic audits** catch both micro and macro issues
+
+### The Reality of AI-Assisted Problem Sets
+
+**Expect imperfection initially.** AI will:
+
+- Make 3-5 technical errors per problem set (normal)
+- Occasionally use wrong reduction directions (catch in audit)
+- Sometimes miss edge cases in proofs (fix in focused review)
+- Rarely include AI thinking markers (remove in final pass)
+- Occasionally use contractions in formal proofs (fix in polish phase)
+- Sometimes inconsistent with mathematical notation (standardize in final audit)
+
+**Your role is iterative refinement, not blind acceptance.** Use the multi-phase audit strategy:
+
+1. Generate complete draft
+2. Fix technical errors per question
+3. Verify comprehensive alignment
+4. Polish presentation (eliminate contractions, standardize notation)
+5. Systematic final audit (AI markers, contractions, notation consistency)
+6. Compilation verification
+
+This approach achieves 100% marks consistently while maintaining academic integrity through your oversight and validation at every step.
 
 Use this template as your foundation, adapt to specific course needs, and achieve consistent excellence across all assignments.
 
 ---
 
-**Version:** 1.0  
+**Version:** 2.1  
 **Last Updated:** November 24, 2025  
-**Maintained by:** Academic Excellence Framework
+**Based on:** Successful CSC373 PS3 completion (56/56 marks + 2 bonus)  
+**Key Additions:** Comprehensive audit methodology, contraction elimination, notation consistency verification
