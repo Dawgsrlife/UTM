@@ -1,0 +1,221 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[noend]{algpseudocode}
+\usepackage{minted}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Problem Set 0 - Solutions}
+\author{CSC263 - Data Structures and Analysis}
+\date{January 15, 2026}
+
+\begin{document}
+\maketitle 
+
+\section*{Problem 1: Runtime Analysis of 0-1 Sorting Algorithm [19 points]}
+
+\subsection*{Algorithm Description}
+
+The provided pseudocode implements a sorting algorithm for lists containing only 0s and 1s:
+
+\begin{algorithmic}
+	\State $n\gets$ length of $L$
+	\While{true}
+	\For{$i$ from 1 to $n$}
+	\If{$L[i] = 1$}
+	\State break
+	\EndIf
+	\EndFor
+	\For{$j$ from $n$ to 1}
+	\If{$L[j] = 0$}
+	\State break
+	\EndIf
+	\EndFor
+	\If{$j>i$}
+	\State swap $L[i],L[j]$
+	\Else \State break
+	\EndIf
+	\EndWhile
+\end{algorithmic}
+
+\subsection*{Part (a): High-Level Description [2 points]}
+
+\textbf{Solution:}
+
+The algorithm repeatedly finds the leftmost 1 and the rightmost 0, swapping them if they are out of order. It terminates when all 0s are before all 1s (i.e., when the leftmost 1 is to the right of the rightmost 0).
+
+\subsection*{Part (b): Runtime Analysis [17 points]}
+
+For a list of length $2n$ containing exactly $n$ zeros and $n$ ones:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+	\hline
+	& $O$ & $\Omega$ & $\Theta$ \\ \hline
+	best-case & $O(n)$ & $\Omega(n)$ & $\Theta(n)$ \\ \hline
+	worst-case & $O(n^2)$ & $\Omega(n^2)$ & $\Theta(n^2)$ \\ \hline
+	average-case & $O(n^2)$ & $\Omega(n^2)$ & $\Theta(n^2)$ \\ \hline
+\end{tabular}
+\end{center}
+
+\textbf{Justification:}
+
+\paragraph{Best-Case: $\Theta(n)$}
+
+The best case occurs when the list is already sorted (all 0s before all 1s). For example: $[0,0,\ldots,0,1,1,\ldots,1]$.
+
+In this case:
+\begin{itemize}
+	\item The first for-loop scans through all $n$ zeros before finding the first 1 at position $n+1$, taking $\Theta(n)$ time
+	\item The second for-loop scans from position $2n$ down to $n+1$ (all 1s) before finding the last 0 at position $n$, taking $\Theta(n)$ time
+	\item Since $j = n < i = n+1$, the condition $j > i$ fails, and the algorithm terminates
+	\item Total: $\Theta(n)$ operations in a single pass
+\end{itemize}
+
+\paragraph{Worst-Case: $\Theta(n^2)$}
+
+The worst case occurs when all 1s precede all 0s, requiring the maximum number of swaps. For example: $[1,1,\ldots,1,0,0,\ldots,0]$.
+
+Analysis:
+\begin{itemize}
+	\item The algorithm performs exactly $n$ swaps (each swap moves one 1 to its correct position in the right half and one 0 to its correct position in the left half)
+	\item The algorithm requires $n+1$ iterations total: $n$ iterations with swaps plus one final iteration to verify termination
+	\item In iteration $k$ (where $k = 1, 2, \ldots, n+1$):
+	\begin{itemize}
+		\item The first for-loop examines $k$ elements to find the $k$-th leftmost 1
+		\item The second for-loop examines $2n - k + 1$ elements to find the $k$-th rightmost 0
+		\item Each iteration scans $\Theta(n)$ elements
+	\end{itemize}
+	\item Total runtime: $\sum_{k=1}^{n+1} \Theta(n) = \Theta(n^2)$
+\end{itemize}
+
+Concrete example: For $[1,1,1,0,0,0]$ (where $n=3$):
+\begin{itemize}
+	\item Iteration 1: Scan to position 1 (1 step) + scan from position 6 (6 steps), swap $L[1]$ and $L[6]$ $\to$ $[0,1,1,0,0,1]$
+	\item Iteration 2: Scan to position 2 (2 steps) + scan from position 5 (5 steps), swap $L[2]$ and $L[5]$ $\to$ $[0,0,1,0,1,1]$
+	\item Iteration 3: Scan to position 3 (3 steps) + scan from position 4 (4 steps), swap $L[3]$ and $L[4]$ $\to$ $[0,0,0,1,1,1]$
+	\item Iteration 4: Scan to position 4 (4 steps) + scan from position 3 (3 steps), check fails, terminate
+	\item Total: $7 + 7 + 7 + 7 = 28 = \Theta(n^2)$ operations
+\end{itemize}
+
+\paragraph{Average-Case: $\Theta(n^2)$}
+
+For the average case over all possible arrangements of $n$ zeros and $n$ ones:
+
+The expected number of swaps required is $\Theta(n)$. This is because, on average, about half the elements are out of position. 
+
+For each swap operation $k$:
+\begin{itemize}
+	\item Expected position of the $k$-th leftmost 1 is approximately at index $\frac{k \cdot 2n}{n} = 2k$
+	\item Expected position of the $k$-th rightmost 0 is approximately at index $2n - 2k$
+	\item Each iteration scans $\Theta(n)$ elements on average
+\end{itemize}
+
+Since we perform $\Theta(n)$ iterations, each taking $\Theta(n)$ time, the average-case runtime is $\Theta(n^2)$.
+
+A more rigorous argument: The expected number of comparisons can be computed by considering that each iteration reduces the "active region" of the array, but the scanning still takes linear time in expectation. The analysis is similar to that of selection sort, which also has $\Theta(n^2)$ average-case complexity.
+
+\subsection*{Bonus Part: Improved Implementation [1 point]}
+
+A better algorithm uses the two-pointer technique:
+
+\begin{algorithmic}
+	\State $i \gets 1$
+	\State $j \gets n$
+	\While{$i < j$}
+		\While{$i < j$ and $L[i] = 0$}
+			\State $i \gets i + 1$
+		\EndWhile
+		\While{$i < j$ and $L[j] = 1$}
+			\State $j \gets j - 1$
+		\EndWhile
+		\If{$i < j$}
+			\State swap $L[i], L[j]$
+			\State $i \gets i + 1$
+			\State $j \gets j - 1$
+		\EndIf
+	\EndWhile
+\end{algorithmic}
+
+\textbf{Runtime:} $\Theta(n)$ in all cases (best, worst, and average).
+
+Each element is examined at most once because the pointers only move inward and never backtrack. This gives $\Theta(n)$ worst-case and average-case runtime, which is optimal since we must examine each element at least once.
+
+\newpage
+
+\section*{Problem 2: String Concatenation Runtime [10 points]}
+
+\subsection*{Given Code:}
+
+\begin{minted}[autogobble]{python}
+def list_of_numbers(num):
+    n = int(num)
+    out = ""
+    for i in range(n):
+        out += str(i+1) + ","
+    return out
+\end{minted}
+
+\subsection*{Solution:}
+
+\textbf{Runtime: $\Theta(n^2)$}
+
+\paragraph{Explanation:}
+
+In Python, strings are \textit{immutable}. This means that the concatenation operation \texttt{out += str(i+1) + ","} does not modify the existing string. Instead, it:
+
+\begin{enumerate}
+	\item Creates a new string object
+	\item Copies all characters from the old \texttt{out} string
+	\item Appends the new characters
+	\item Reassigns \texttt{out} to point to this new string
+\end{enumerate}
+
+\paragraph{Detailed Analysis:}
+
+At iteration $i$ (where $i = 0, 1, \ldots, n-1$):
+\begin{itemize}
+	\item The current length of \texttt{out} is approximately proportional to $i$ (specifically, it's roughly $2i$ characters, accounting for numbers and commas)
+	\item The concatenation operation takes $\Theta(i)$ time to copy the existing string
+	\item Adding the new number takes $\Theta(\log i)$ time (for converting the number to a string)
+	\item Total time for iteration $i$: $\Theta(i)$
+\end{itemize}
+
+Summing over all iterations:
+\[
+T(n) = \sum_{i=1}^{n} \Theta(i) = \Theta\left(\sum_{i=1}^{n} i\right) = \Theta\left(\frac{n(n+1)}{2}\right) = \Theta(n^2)
+\]
+
+\paragraph{Why This Is Tricky:}
+
+At first glance, the code appears to be $\Theta(n)$ since there's only one loop. However, the hidden cost of string concatenation in Python makes this quadratic. Each \texttt{+=} operation on strings is $O(length)$, not $O(1)$.
+
+\paragraph{Efficient Alternative:}
+
+To achieve $\Theta(n)$ runtime, use a list to accumulate strings and join them once:
+
+\begin{minted}[autogobble]{python}
+def list_of_numbers(num):
+    n = int(num)
+    parts = []
+    for i in range(n):
+        parts.append(str(i+1))
+    return ",".join(parts)
+\end{minted}
+
+Or more concisely:
+
+\begin{minted}[autogobble]{python}
+def list_of_numbers(num):
+    n = int(num)
+    return ",".join(str(i+1) for i in range(n))
+\end{minted}
+
+Both alternatives run in $\Theta(n)$ time because:
+\begin{itemize}
+	\item Appending to a list is amortized $O(1)$
+	\item The \texttt{join} operation concatenates all strings in a single pass, taking $\Theta(total\_length)$ time, which is $\Theta(n)$ for this problem
+\end{itemize}
+
+\end{document}

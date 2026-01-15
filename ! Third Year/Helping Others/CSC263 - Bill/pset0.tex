@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[noend]{algpseudocode}
+\usepackage{minted}
+\title{Problem Set 0}
+\date{Due January 18}
+\begin{document}
+\maketitle 
+
+\begin{enumerate}
+
+	\item{\bf [19]} Consider this pseudocode for sorting a list of 0s and 1s so that all 0s are before all 1s.
+
+		\begin{algorithmic}
+			\State $n\gets$ length of $L$
+			\While{true}
+			\For{$i$ from 1 to $n$}
+			\If{$L[i] = 1$}
+			\State break
+			\EndIf
+			\EndFor
+			\For{$j$ from $n$ to 1}
+			\If{$L[j] = 0$}
+			\State break
+			\EndIf
+			\EndFor
+			\If{$j>i$}
+			\State swap $L[i],L[j]$
+			\Else \State break
+			\EndIf
+			\EndWhile
+		\end{algorithmic}
+
+		\begin{enumerate}
+			\item{\bf[2]} Give a high-level description of the algorithm. It should be as short and clear as possible. You should avoid details that matter for runtime but not for correctness.
+
+			\item{\bf[17]} Analyze the runtime of the pseudocode, when the input is a list of length $2n$ containing $n$ 0s and $n$ 1s. Fill out the table with $O,\Omega,$ and $\Theta$ bounds on the best-, worst-, and average-case runtime. The distribution for the average-case runtime is the uniform distribution on lists with $n$ 0s and $n$ 1s. 
+
+				Give appropriate justifications. You don't need a formal proof for every entry. Some entries may not need any statement at all. The easy entries are worth 1 point, and the ones requiring more complex arguments are worth 3.
+
+
+
+
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			& $O$ & $\Omega$ & $\Theta$ \\ \hline
+			best-case & \hspace{2cm} & \hspace{2cm} & \hspace{2cm} \\ \hline
+			worst-case & & & \\ \hline
+			average-case & & & \\ \hline
+		\end{tabular}
+
+
+	\item{\bf [1 (Bonus)]} Give an implementation of the same algorithm with better worst-case and average-case runtime.
+		\end{enumerate}
+
+\item {\bf [10]} The following Python code gets a string containing a number, and returns a string with a list of all numbers up to the input number, separated by commas.  What is the runtime? 
+
+	For this question, you are allowed (and encouraged!) to look up information online. Be careful, this one is tricky.
+
+	\begin{minted}[autogobble]{python}
+		def list_of_numbers(num):
+		    n = int(num)
+		    out = ""
+		    for i in range(n):
+			out += str(i+1) + ","
+		    return out
+	\end{minted}
+\end{enumerate}
+\end{document}
