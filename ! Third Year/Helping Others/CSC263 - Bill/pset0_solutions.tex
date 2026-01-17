@@ -2,9 +2,24 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage[noend]{algpseudocode}
-\usepackage{minted}
+\usepackage{listings}
+\usepackage{xcolor}
 \usepackage{geometry}
 \geometry{margin=1in}
+
+% Configure listings for Python
+\lstset{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue},
+	stringstyle=\color{red},
+	commentstyle=\color{gray},
+	showstringspaces=false,
+	breaklines=true,
+	frame=single,
+	numbers=left,
+	numberstyle=\tiny\color{gray}
+}
 
 \title{Problem Set 0 - Solutions}
 \author{CSC263 - Data Structures and Analysis}
@@ -80,41 +95,45 @@ The worst case occurs when all 1s precede all 0s, requiring the maximum number o
 Analysis:
 \begin{itemize}
 	\item The algorithm performs exactly $n$ swaps (each swap moves one 1 to its correct position in the right half and one 0 to its correct position in the left half)
-	\item The algorithm requires $n+1$ iterations total: $n$ iterations with swaps plus one final iteration to verify termination
-	\item In iteration $k$ (where $k = 1, 2, \ldots, n+1$):
-	\begin{itemize}
-		\item The first for-loop examines $k$ elements to find the $k$-th leftmost 1
-		\item The second for-loop examines $2n - k + 1$ elements to find the $k$-th rightmost 0
-		\item Each iteration scans $\Theta(n)$ elements
-	\end{itemize}
-	\item Total runtime: $\sum_{k=1}^{n+1} \Theta(n) = \Theta(n^2)$
+	\item In iteration $k$ (for $k = 1, 2, \ldots, n$), the array already has $k-1$ zeros at the beginning and $k-1$ ones at the end (from previous swaps)
+	\item The first for-loop must scan past the $k-1$ zeros to find the first 1 at position $k$. Cost: $\Theta(k)$
+	\item The second for-loop must scan past the $k-1$ ones at the end to find the first 0 at position $2n-k+1$. Cost: $\Theta(k)$
+	\item Total cost per iteration: $\Theta(k)$
 \end{itemize}
+
+The total runtime is the sum of these increasing costs:
+\[
+T(n) = \sum_{k=1}^{n} \Theta(k) = \Theta\left(\sum_{k=1}^{n} k\right) = \Theta\left(\frac{n(n+1)}{2}\right) = \Theta(n^2)
+\]
 
 Concrete example: For $[1,1,1,0,0,0]$ (where $n=3$):
 \begin{itemize}
-	\item Iteration 1: Scan to position 1 (1 step) + scan from position 6 (6 steps), swap $L[1]$ and $L[6]$ $\to$ $[0,1,1,0,0,1]$
-	\item Iteration 2: Scan to position 2 (2 steps) + scan from position 5 (5 steps), swap $L[2]$ and $L[5]$ $\to$ $[0,0,1,0,1,1]$
-	\item Iteration 3: Scan to position 3 (3 steps) + scan from position 4 (4 steps), swap $L[3]$ and $L[4]$ $\to$ $[0,0,0,1,1,1]$
-	\item Iteration 4: Scan to position 4 (4 steps) + scan from position 3 (3 steps), check fails, terminate
-	\item Total: $7 + 7 + 7 + 7 = 28 = \Theta(n^2)$ operations
+	\item Iteration 1: Scan to position 1 (1 step) + scan from position 6 (1 step, breaks immediately at 0), swap $L[1]$ and $L[6]$ $\to$ $[0,1,1,0,0,1]$
+	\item Iteration 2: Scan to position 2 (2 steps) + scan from position 5 (2 steps, scans past one 1), swap $L[2]$ and $L[5]$ $\to$ $[0,0,1,0,1,1]$
+	\item Iteration 3: Scan to position 3 (3 steps) + scan from position 4 (3 steps, scans past two 1s), swap $L[3]$ and $L[4]$ $\to$ $[0,0,0,1,1,1]$
+	\item Iteration 4: Scan to position 4 (4 steps) + scan from position 3 (4 steps), check fails, terminate
+	\item Total: $(1+1) + (2+2) + (3+3) + (4+4) = 20 = \Theta(n^2)$ operations
 \end{itemize}
 
 \paragraph{Average-Case: $\Theta(n^2)$}
 
 For the average case over all possible arrangements of $n$ zeros and $n$ ones:
 
-The expected number of swaps required is $\Theta(n)$. This is because, on average, about half the elements are out of position. 
+In a random permutation of $n$ zeros and $n$ ones, we expect approximately $\Theta(n)$ elements to be out of place, requiring $\Theta(n)$ swaps.
 
-For each swap operation $k$:
+Crucially, the cost of finding the next elements to swap \textbf{increases} as the algorithm progresses:
 \begin{itemize}
-	\item Expected position of the $k$-th leftmost 1 is approximately at index $\frac{k \cdot 2n}{n} = 2k$
-	\item Expected position of the $k$-th rightmost 0 is approximately at index $2n - 2k$
-	\item Each iteration scans $\Theta(n)$ elements on average
+	\item In iteration $k$, the first $k-1$ zeros and the last $k-1$ ones are already in their correct positions
+	\item The pointers must scan past these sorted sections to find the next targets
+	\item Therefore, the $k$-th iteration performs $\Theta(k)$ comparisons
 \end{itemize}
 
-Since we perform $\Theta(n)$ iterations, each taking $\Theta(n)$ time, the average-case runtime is $\Theta(n^2)$.
+The total work is the sum of these increasing costs:
+\[
+T(n) = \sum_{k=1}^{n} \Theta(k) = \Theta\left(\sum_{k=1}^{n} k\right) = \Theta\left(\frac{n(n+1)}{2}\right) = \Theta(n^2)
+\]
 
-A more rigorous argument: The expected number of comparisons can be computed by considering that each iteration reduces the "active region" of the array, but the scanning still takes linear time in expectation. The analysis is similar to that of selection sort, which also has $\Theta(n^2)$ average-case complexity.
+This demonstrates that the runtime is quadratic not because every iteration costs $\Theta(n)$, but because the cost per iteration grows linearly from $\Theta(1)$ to $\Theta(n)$, and these costs sum to $\Theta(n^2)$.
 
 \subsection*{Bonus Part: Improved Implementation [1 point]}
 
@@ -148,14 +167,14 @@ Each element is examined at most once because the pointers only move inward and 
 
 \subsection*{Given Code:}
 
-\begin{minted}[autogobble]{python}
+\begin{lstlisting}
 def list_of_numbers(num):
     n = int(num)
     out = ""
     for i in range(n):
         out += str(i+1) + ","
     return out
-\end{minted}
+\end{lstlisting}
 
 \subsection*{Solution:}
 
@@ -195,22 +214,22 @@ At first glance, the code appears to be $\Theta(n)$ since there's only one loop.
 
 To achieve $\Theta(n)$ runtime, use a list to accumulate strings and join them once:
 
-\begin{minted}[autogobble]{python}
+\begin{lstlisting}
 def list_of_numbers(num):
     n = int(num)
     parts = []
     for i in range(n):
         parts.append(str(i+1))
     return ",".join(parts)
-\end{minted}
+\end{lstlisting}
 
 Or more concisely:
 
-\begin{minted}[autogobble]{python}
+\begin{lstlisting}
 def list_of_numbers(num):
     n = int(num)
     return ",".join(str(i+1) for i in range(n))
-\end{minted}
+\end{lstlisting}
 
 Both alternatives run in $\Theta(n)$ time because:
 \begin{itemize}
