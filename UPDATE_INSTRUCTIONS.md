@@ -30,17 +30,46 @@ git push
 
 ---
 
-## 📥 Pulling Updates (Main Repo + All Submodules)
+## 📥 Pulling Updates (Main Repo + Active Submodules)
 
-Run these commands to pull the latest changes from the main repository and all submodules:
+Run these commands to pull the latest changes from the main repository and **Third/Fourth Year submodules only** (skips First/Second Year to avoid redundant network fetches for archived repos):
 
 ```powershell
 git pull origin main;
 git pull --recurse-submodules;
 git submodule update --init --recursive --remote;
-git submodule foreach --recursive 'git fetch origin --quiet; b=$(git symbolic-ref --short -q HEAD 2>/dev/null || echo); if [ -z "$b" ]; then if git show-ref --verify --quiet refs/heads/main; then git checkout -q main || true; elif git show-ref --verify --quiet refs/heads/master; then git checkout -q master || true; else echo NO_MAIN_OR_MASTER; fi; else echo BRANCH:$b; fi'
-git submodule foreach --recursive 'git fetch origin --quiet; b=$(git symbolic-ref --short -q HEAD 2>/dev/null || echo); if [ -z "$b" ]; then if git show-ref --verify --quiet refs/heads/main; then git checkout -q main || true; elif git show-ref --verify --quiet refs/heads/master; then git checkout -q master || true; fi; b=$(git symbolic-ref --short -q HEAD 2>/dev/null || echo); fi; if [ -n "$b" ] && git show-ref --verify --quiet "refs/remotes/origin/$b"; then git pull --ff-only --recurse-submodules origin "$b" || true; else git pull --ff-only --recurse-submodules || true; fi; git submodule update --init --recursive --remote || true'
+
+# Branch-track and pull only active (Third Year & Fourth Year) submodules
+$base = (Get-Location).Path
+$activeModules = @(
+    "! Third Year/Fall Term/CSC258",
+    "! Third Year/Fall Term/CSC324",
+    "! Third Year/Fall Term/CSC373",
+    "! Third Year/Fall Term/CSC384",
+    "! Third Year/Winter Term/CSC301",
+    "! Third Year/Winter Term/CSC309",
+    "! Third Year/Winter Term/CSC343"
+    # Add "! Fourth Year/..." entries here as they are created
+)
+foreach ($m in $activeModules) {
+    $p = Join-Path $base $m
+    if (Test-Path "$p\.git") {
+        Write-Host "==> $m"
+        Push-Location $p
+        git fetch origin --quiet
+        $b = git symbolic-ref --short -q HEAD 2>$null
+        if ($b) { git pull --ff-only origin $b } else { git pull --ff-only }
+        Pop-Location
+    }
+}
 ```
+
+> **To restore full all-submodules pull (First, Second, Third, Fourth Year):**
+> Replace the `$activeModules` loop above with these original `git submodule foreach` commands:
+> ```powershell
+> git submodule foreach --recursive 'git fetch origin --quiet; b=$(git symbolic-ref --short -q HEAD 2>/dev/null || echo); if [ -z "$b" ]; then if git show-ref --verify --quiet refs/heads/main; then git checkout -q main || true; elif git show-ref --verify --quiet refs/heads/master; then git checkout -q master || true; else echo NO_MAIN_OR_MASTER; fi; else echo BRANCH:$b; fi'
+> git submodule foreach --recursive 'git fetch origin --quiet; b=$(git symbolic-ref --short -q HEAD 2>/dev/null || echo); if [ -z "$b" ]; then if git show-ref --verify --quiet refs/heads/main; then git checkout -q main || true; elif git show-ref --verify --quiet refs/heads/master; then git checkout -q master || true; fi; b=$(git symbolic-ref --short -q HEAD 2>/dev/null || echo); fi; if [ -n "$b" ] && git show-ref --verify --quiet "refs/remotes/origin/$b"; then git pull --ff-only --recurse-submodules origin "$b" || true; else git pull --ff-only --recurse-submodules || true; fi; git submodule update --init --recursive --remote || true'
+> ```
 
 ---
 
@@ -77,7 +106,9 @@ git status
 ## 💡 Key Points
 
 - **Push workflow:** Submodules first, then main repo
-- **Pull workflow:** Main repo first, then submodules with branch tracking
+- **Pull workflow:** Main repo first, then active submodules (Third/Fourth Year) with branch tracking
+- **Active submodules:** Only Third/Fourth Year are branch-tracked on pull; First/Second Year are intentionally skipped to save time
+- **Restore all-submodules pull:** See the note block inside the pull section for the original `git submodule foreach` commands
 - **After clone:** Always run `git submodule update --init --recursive`
 - **PowerShell:** Use semicolons (`;`) to chain commands
 - **Nested submodules:** Commands handle nested structures automatically (e.g., CSC373 → WDI)
