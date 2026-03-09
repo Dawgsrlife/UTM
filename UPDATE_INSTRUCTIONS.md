@@ -50,6 +50,8 @@ $activeModules = @(
     "! Third Year/Winter Term/CSC309",
     "! Third Year/Winter Term/CSC343"
     # Add "! Fourth Year/..." entries here as they are created
+    # Note: CSC301 C2 MarkUs repo (group_2556) is a nested submodule inside CSC301,
+    # accessible at: ! Third Year/Winter Term/CSC301/Assignments/A2/group_2556
 )
 foreach ($m in $activeModules) {
     $p = Join-Path $base $m
